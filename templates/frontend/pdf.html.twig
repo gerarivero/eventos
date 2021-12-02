@@ -1,0 +1,143 @@
+<html>
+<HEAD>
+ <meta content="text/html;" http-equiv="content-type" charset="utf-8">
+</HEAD>
+<link href="{{app.request.getSchemeAndHttpHost() ~ asset('fonts/stylesheet.css')}}" rel="stylesheet">
+<style>
+
+    body {
+        background-image: url('{{app.request.getSchemeAndHttpHost() ~ asset('uploads/cursos/'~inscripcion.curso.plantilla.path)}}');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        font-family: 'DaxlinePro-Bold';
+        
+    }
+}
+</style>
+<style>
+.center{
+       margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+}
+    .plantilla {        
+        text-align: center;
+    }
+    .titulo {
+       font-size: {{inscripcion.curso.plantilla.tituloSize}}px;
+       position: absolute;
+       top: {{inscripcion.curso.plantilla.tituloMargin}}mm;       
+    }
+    .nombre {
+       font-size: {{inscripcion.curso.plantilla.nombreSize}}px;
+       position: absolute;
+       top: {{inscripcion.curso.plantilla.nombreMT}}mm;              
+    }
+    .dniParticipacion {
+       font-size: {{inscripcion.curso.plantilla.DniParticipacionSize}}px;
+       position: absolute;
+       top: {{inscripcion.curso.plantilla.DniParticipacionMT}}mm;
+       left: {{inscripcion.curso.plantilla.DniParticipacionML}}mm;       
+    }
+    .dni {
+       font-size: {{inscripcion.congreso.plantilla.DniSize}}px;
+       position: absolute;
+       top: {{inscripcion.congreso.plantilla.DniMT}}mm;
+       left: {{inscripcion.congreso.plantilla.DniML}}mm;       
+    }
+    .curso {
+       font-size: {{inscripcion.curso.plantilla.cursoSize}}px;
+       position: absolute;
+       top: {{inscripcion.curso.plantilla.cursoMargin}}mm;       
+    }
+    .asistencia {
+       font-size: {{inscripcion.curso.plantilla.asistenciaSize}}px;
+       position: absolute;
+       top: {{inscripcion.curso.plantilla.asistenciaMT}}mm;
+       left: {{inscripcion.curso.plantilla.asistenciaML}}mm;
+    }
+    .duracion {
+       font-size: {{inscripcion.congreso.plantilla.duracionSize}}px;
+       position: absolute;
+       top: {{inscripcion.congreso.plantilla.duracionMT}}mm;
+       left: {{inscripcion.congreso.plantilla.duracionML}}mm;
+    }
+    .qr {       
+       position: absolute;
+       top: {{inscripcion.curso.plantilla.qrMT}}mm;
+       left: {{inscripcion.curso.plantilla.qrML}}mm;
+    }
+    .codigo {
+       font-size: {{inscripcion.curso.plantilla.codigoSize}}px;
+       position: absolute;
+       top: {{inscripcion.curso.plantilla.codigoMT}}mm;
+       left: {{inscripcion.curso.plantilla.codigoML}}mm;
+    }
+</style>
+<body>
+    <div class="plantilla">
+        <div class="titulo center">{{inscripcion.curso.plantilla.titulo}}</div>        
+        <div class="nombre center">
+            {{inscripcion.alumno.persona.nombre}}
+                {{inscripcion.alumno.persona.apellido}}
+        </div>
+        <div class="dni center">
+            {% if inscripcion.congreso.plantilla.mostrarDni %}            
+            {{inscripcion.persona.dni}}
+            {% endif %}            
+        </div>
+        <div class="dniParticipacion center">            
+            {% if inscripcion.curso.plantilla.mostrarParticipacion %}
+            Participó en calidad de
+            {{inscripcion.estado}}
+            al
+            {% endif %}
+        </div>
+        <div class="curso center">
+              {{inscripcion.curso}}
+        </div>  
+        <div class="qr">
+            {% set message = "" %}
+            {% if qr.nombreEvento %}
+                {% set message = message~inscripcion.curso %}
+              {% endif %}
+              {% if qr.nombre %}
+                {% set message = message~". "~inscripcion.alumno.persona.nombre %}
+              {% endif %}
+              {% if qr.apellido %}
+                {% set message = message~" "~inscripcion.alumno.persona.apellido %}
+              {% endif %}
+              {% if qr.dni %}
+                {% set message = message~". DNI: "~inscripcion.alumno.persona.dni %}
+              {% endif %}
+              {% if qr.asistencia %}
+                {% set message = message~". asistencia: "~inscripcion.porcAsistencia %}
+              {% endif %}
+              {% if qr.cargaHoraria %}
+                {% set message = message~". carga horaria: "~inscripcion.porcAsistencia %}
+              {% endif %}
+              {% if qr.fechas %}              
+                {% set message = message~". fecha/s de realización: " %}
+                
+                  {% set message = message~"desde: "~inscripcion.curso.fechaInicio|date("d/m/Y")~"," %}
+                  {% set message = message~"hasta: "~inscripcion.curso.fechaFin|date("d/m/Y")~"," %}  
+                
+              {% endif %}
+              {% set message = message~". "~qr.textoAdicional %}
+              <img height="{{inscripcion.curso.plantilla.qrSize}}" width="{{inscripcion.curso.plantilla.qrSize}}" src="{{ qr_code_data_uri(message, { writer: 'svg' }) }}"/>
+        </div>
+        <div class="asistencia">
+            {{inscripcion.porcAsistencia}}%
+        </div>
+        <div class="duracion">
+            {{inscripcion.curso.duracion}}
+        </div>
+        <div class="codigo">
+            {{inscripcion.codigo}}
+        </div>
+    </div>
+</body></div></body>
+</html>

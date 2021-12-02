@@ -1,0 +1,17 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Localidad:
+            class: App\Entity\Localidad         
+            label: 'Localidades'
+            form:
+                fields:                 
+                 - { property: 'nombre'}
+                 - { property: 'departamento'}
+                 - { property: 'idrpcd', label: "Id de localidad en Registro de PCD"}
+            list:
+                fields:
+                 - { property: 'nombre'}
+                 - { property: 'departamento'}
+                 - { property: 'idrpcd', label: "Id de localidad en Registro de PCD"}
+            export:

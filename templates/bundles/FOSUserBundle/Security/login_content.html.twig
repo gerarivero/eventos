@@ -1,0 +1,322 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<link href="/static/css/fonts.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link rel="icon" type="image/jpg" href="/static/images/logo_favicon.png"/>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="/static/css/fonts.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link rel="icon" type="image/jpg" href="/static/images/logo_favicon.png"/>
+<link rel="stylesheet" href="/static/css/styles.css">
+<link
+rel="stylesheet" href="/static/css/animate.css">
+<!------ Include the above in your HEAD tag ---------->
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield; /* Firefox */
+    }
+    input::placeholder {
+        color: #c7c7c7 !important;
+    }
+    .smallplace::placeholder {
+        font-size: 0.82em;
+    }
+    .carousel-caption {
+        color: rgba(0, 0, 0, 0.35);
+        background-color: rgba(0, 0, 0, 0.35);
+    }
+    .skip {
+        position: absolute;
+        top: -1000px;
+        left: -1000px;
+        height: 1px;
+        width: 1px;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    .skip:active,
+    .skip:focus,
+    .skip:hover {
+        left: 0;
+        top: 0;
+        width: auto;
+        height: auto;
+        overflow: visible;
+    }
+    .iprodich a.link-carousel {
+        color: #ffffff;
+        background-color: transparent;
+    }
+    .iprodich a.link-carousel:hover {
+        color: #00ADF3;
+        background-color: transparent;
+    }
+
+    #pauseButton,
+    #playButton {
+        margin-top: 50px;
+    }
+</style>
+<style>
+    body {
+        margin: 0;
+        color: #edf3ff;
+        background: #c8c8c8;
+        background: url('https://hdqwalls.com/download/material-design-4k-2048x1152.jpg') fixed;
+        background-size: cover;
+        font: 600 16px / 18px 'Open Sans', sans-serif;
+    }
+    :after,:before {
+        box-sizing: border-box
+    }
+    .clearfix:after,
+    .clearfix:before {
+        content: '';
+        display: table
+    }
+    .clearfix:after {
+        clear: both;
+        display: block
+    }
+    a {
+        color: inherit;
+        text-decoration: none
+    }
+
+    .login-wrap {
+        width: 100%;
+        margin: auto;
+        max-width: 510px;
+        min-height: 510px;
+        position: relative;
+        background: url('https://maxcdn.icons8.com/app/uploads/2016/03/material-1-1000x563.jpg') no-repeat center;
+        background-size: cover;
+        box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+    }
+    .login-html {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        padding: 90px 70px 50px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    .login-html .sign-in-htm,
+    .login-html .for-pwd-htm {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transition: all 0.4s linear;
+        transition: all 0.4s linear;
+    }
+    .login-html .sign-in,
+    .login-html .for-pwd,
+    .login-form .group .check {
+        display: none;
+    }
+    .login-html .tab,
+    .login-form .group .label,
+    .login-form .group .button {
+        text-transform: uppercase;
+    }
+    .login-html .tab {
+        font-size: 22px;
+        margin: 0 15px 10px 0;
+        padding-bottom: 5px;
+        display: inline-block;
+        border-bottom: 2px solid transparent;
+    }
+    .login-html .sign-in:checked + .tab,
+    .login-html .for-pwd:checked + .tab {
+        color: #fff;
+        border-color: #1161ee;
+    }
+    .login-form {
+        min-height: 345px;
+        position: relative;
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+    .login-form .group {
+        margin-bottom: 15px;
+    }
+    .login-form .group .label,
+    .login-form .group .input,
+    .login-form .group .button {
+        width: 100%;
+        color: #fff;
+        display: block;
+    }
+    .login-form .group .input,
+    .login-form .group .button {
+        border: none;
+        padding: 15px 20px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, .1);
+    }
+    .login-form .group input[data-type="password"] {
+        text-security: circle;
+        -webkit-text-security: circle;
+    }
+    .login-form .group .label {
+        color: #aaa;
+        font-size: 12px;
+    }
+    .login-form .group .button {
+        background: #1161ee;
+    }
+    .login-form .group label .icon {
+        width: 15px;
+        height: 15px;
+        border-radius: 2px;
+        position: relative;
+        display: inline-block;
+        background: rgba(255, 255, 255, .1);
+    }
+    .login-form .group label .icon:before,
+    .login-form .group label .icon:after {
+        content: '';
+        width: 10px;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        -webkit-transition: all 0.2s ease-in-out 0s;
+        transition: all 0.2s ease-in-out 0s;
+    }
+    .login-form .group label .icon:before {
+        left: 3px;
+        width: 5px;
+        bottom: 6px;
+        -webkit-transform: scale(0) rotate(0);
+        transform: scale(0) rotate(0);
+    }
+    .login-form .group label .icon:after {
+        top: 6px;
+        right: 0;
+        -webkit-transform: scale(0) rotate(0);
+        transform: scale(0) rotate(0);
+    }
+    .login-form .group .check:checked + label {
+        color: #fff;
+    }
+    .login-form .group .check:checked + label .icon {
+        background: #1161ee;
+    }
+    .login-form .group .check:checked + label .icon:before {
+        -webkit-transform: scale(1) rotate(45deg);
+        transform: scale(1) rotate(45deg);
+    }
+    .login-form .group .check:checked + label .icon:after {
+        -webkit-transform: scale(1) rotate(-45deg);
+        transform: scale(1) rotate(-45deg);
+    }
+    .login-html .sign-in:checked + .tab + .for-pwd + .tab + .login-form .sign-in-htm {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    .login-html .for-pwd:checked + .tab + .login-form .for-pwd-htm {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    .hr {
+        height: 2px;
+        margin: 60px 0 50px;
+        background: rgba(255, 255, 255, .2);
+    }
+    .foot-lnk {
+        text-align: center;
+    }
+</style>
+
+{% trans_default_domain 'FOSUserBundle' %}
+<header class=""> {% block botonCarrusel %}{% endblock %}
+    <a onclick="showfocus();
+                                                    $('#content').focus();" href="#content" tabindex="1" class="skip" title="Saltar a leer el contenido principal de esta página">
+        Saltar al contenido principal
+    </a>
+    <div class="container">
+        <div class="navbar navbar-light">
+
+            <a id="logoPrincipal" tabindex="10" class="navbar-brand mx-auto" href="/"><img class="logo" src="/static/images/logo.svg" alt="IPRODICH inicio"></a>
+
+        </div>
+    </div>
+    <div class="redes hidden-sm">
+        <ul class="d-flex justify-content-center align-items-center">
+            <li class="ico-social">
+                <a href="https://www.facebook.com/Iprodich/" tabindex="12" onfocus="cerrarBuscador();"><img src="/static/images/facebook.svg" data-toggle="tooltip" data-placement="top" title="Acceder a Facebook" alt="Facebook" class="img-fluid"></a>
+            </li>
+            <li class="ico-social">
+                <a href="https://twitter.com/IPRODICH" tabindex="13"><img src="/static/images/twitter.svg" data-toggle="tooltip" data-placement="top" title="Acceder a Twitter" alt="Twitter" class="img-fluid"></a>
+            </li>
+            <li class="ico-social">
+                <a href="https://www.instagram.com/iprodich/" tabindex="14"><img src="/static/images/instagram.svg" data-toggle="tooltip" data-placement="top" title="Acceder a Instagram" alt="Instagram" class="img-fluid"></a>
+            </li>
+            <li class="ico-social">
+                <a href="https://www.youtube.com/channel/UCthHXPwOUm4Z3gvbBbPv9_A" tabindex="15"><img src="/static/images/youtube.svg" data-toggle="tooltip" data-placement="top" title="Acceder a Youtube" alt="Youtube" class="img-fluid"></a>
+            </li>
+        </ul>
+    </div>
+</header>
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="login-wrap">
+    <div class="login-html">
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Iniciar Sesión</label>
+        <input id="tab-2" type="radio" name="tab" class="for-pwd"><label for="tab-2" class="tab"></label>
+        <div class="login-form">
+            <div class="sign-in-htm">
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+                    {% if csrf_token %}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                    {% endif %}
+                    <div class="group">
+                        <label class="label" for="username">{{ 'security.login.username'|trans }}</label>
+                        <input class="input" type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username"/>
+                    </div>
+
+                    <div class="group">
+                        <label class="label" for="password">{{ 'security.login.password'|trans }}</label>
+                        <input class="input" type="password" id="password" name="_password" required="required" autocomplete="current-password"/>
+                    </div>
+
+                    <div class="group">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                        <label class="label" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                    </div>
+
+                    <div class="group">
+                        <input class="button" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
+                    </div>
+                </form>
+                <a href="{{ path('fos_user_resetting_request') }}">Olvidó su contraseña ?</a>
+                <div class="hr"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

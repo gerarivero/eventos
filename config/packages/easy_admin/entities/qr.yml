@@ -1,0 +1,28 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Qr:
+            class: App\Entity\Qr         
+            label: 'Códigos Qr'
+            form:
+                fields:
+                 - { property: 'tituloQr'}
+                 - { property: 'nombreEvento'}                 
+                 - { property: 'nombre'}
+                 - { property: 'apellido'}
+                 - { property: 'dni'}
+                 - { property: 'cargaHoraria'}
+                 - { property: 'asistencia'}
+                 - { property: 'fechas'}
+                 - { property: 'textoAdicional'}   
+            list:
+                fields:
+                 - { property: 'tituloQr'}
+                 - { property: 'nombreEvento'}                 
+                 - { property: 'nombre'}
+                 - { property: 'apellido'}
+                 - { property: 'dni'}
+                 - { property: 'cargaHoraria'}
+                 - { property: 'asistencia'}
+                 - { property: 'fechas'}
+            export: 

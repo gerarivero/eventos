@@ -1,0 +1,43 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Congreso:            
+            class: App\Entity\Congreso            
+            label: 'Congresos'
+            
+            form:
+                fields:
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'clave', label: 'Clave para estadísticas', css_class: 'col-md-6' }
+                  - { property: 'plantilla', css_class: 'col-md-6' }
+                  - { property: 'fechas', label: 'Fechas', type: 'collection', type_options: { entry_type: 'App\Form\FechasCongresoType', by_reference: false }, css_class: 'col-md-12'}
+            show:
+                fields:
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'clave', label: 'Clave para estadísticas', css_class: 'col-md-6' }
+                  - { property: 'plantilla', css_class: 'col-md-6' }
+                  - { property: 'fechas', label: 'Fechas', type: 'collection', type_options: { entry_type: 'App\Form\FechasCongresoType', by_reference: false }, css_class: 'col-md-12'}
+                            
+            list:
+                batch_actions: ['-delete']
+                item_permission: ['ROLE_CONGRESO_ACREDITADOR', 'ROLE_ADMIN_CONGRESO']
+                fields:
+                  - { property: 'nombre', css_class: 'col-md-6' }          
+                actions: 
+                  - { name: 'verInscriptosCongreso', item_permission: [ROLE_SUPER_ADMIN] }
+                  - { name: 'acreditar', type: 'route', permission: [ROLE_SUPER_ADMIN] }
+                  - { name: 'estadisticas_congreso', type: 'route', item_permission: ROLE_CONGRESO_ACREDITADOR }
+                  - { name: 'new', item_permission: ['ROLE_SUPER_ADMIN'] }
+                filters:                  
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'fechas', css_class: 'col-md-6' }
+            new:
+                item_permission: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN_CONGRESO']
+            edit:
+                item_permission: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN_CONGRESO']
+            acreditar:
+                item_permission: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN_CONGRESO']
+            export:
+            delete:
+                item_permission: [ROLE_SUPER_ADMIN]      
+                                    

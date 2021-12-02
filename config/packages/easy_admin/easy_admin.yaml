@@ -1,0 +1,20 @@
+#easy_admin_extension:
+#    minimum_role: ROLE_CURSO
+
+easy_admin:
+    site_name: '<img height=32 src="/images/logo_favicon.png"/> IPRODICH - EVENTOS'
+    user:
+        display_name: true
+        display_avatar: false
+    list:
+        actions:
+            - { name: 'show',icon: 'pen-square', type_options: 'style="color:black;', label: 'Mostrar' }
+            - { name: 'edit', icon: 'pencil', label: 'Editar' }
+            - { name: 'delete', icon: 'ban', label: 'Eliminar'}
+        batch_actions: 
+            - { name: 'delete', icon: 'ban', label: 'Eliminar', item_permission: 'ROLE_SUPER_ADMIN'} 
+    formats:
+        date:     'd/m/Y'
+        time:     'H:i'
+        datetime: 'd/m/Y H:i:s'
+        number: '%.0f'

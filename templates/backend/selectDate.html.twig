@@ -1,0 +1,16 @@
+{% extends '@EasyAdmin/default/layout.html.twig' %}
+{% block content_title %}
+    {% apply spaceless %}
+        {% set _default_title = 'Seleccionar Fecha para acreditar' %}
+        {{ _entity_config.new.title is defined ? _entity_config.new.title|trans(_trans_parameters) : _default_title }}
+    {% endapply %}
+{% endblock %}
+{% block main %}
+    {% block entity_form %}
+        {{ form_start(form) }}
+        {{ form_row(form.fecha) }}
+        <br>
+        {{ form_end(form) }}
+        
+    {% endblock entity_form %}
+{% endblock %}

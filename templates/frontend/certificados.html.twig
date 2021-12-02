@@ -1,0 +1,181 @@
+{% extends 'frontend/layout.html.twig' %}
+{% block page %}
+    <style>
+        .text-alert {
+            color: #3f51b5 !important;
+        }
+    </style>
+    <main
+        class="container">
+
+        <!-- buscar -->
+        <section class="estatica">
+            <div class="listatit">
+                <h1 tabindex="16" class="scfocus">
+                    <span class="go"><img src="/static/images/go.svg" alt="ir"></span>Certificados</h1>
+                <hr>
+            </div>
+            <nav class="hidden-sm" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a tabindex="16" href="/">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page" tabindex="16">Certificados</li>
+                </ol>
+            </nav>
+            <div class="buscador">
+                {{ form_start(form, {'action': path('certificados'), 'method': 'POST'}) }}
+                <h2 tabindex="16" class="scfocus">Buscar</h2>
+                <div class="row">
+                    <div id="passwordHelpBlock" class="col form-text text-alert">
+                        * Recuerde que para obtener sus certificados debe introducir su número de documento sin puntos o el código de verificación que figura en el certificado
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        {{ form_row(form.dni) }}
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="norma_filter_ano" hidden>Código de verificación</label>
+                        {{ form_row(form.codigo) }}
+                    </div>
+
+                </div>
+
+                <hr>
+                <button tabindex="16" type="submit" class="btn btn-info btn-lg btn-block scfocus">BUSCAR</button>
+                {{ form_end(form) }}
+                <hr>
+            </form>
+        </div>
+
+    </section>
+
+    <section tabindex="16">
+        {% if certificados|length > 0 or certificadosCongreso|length > 0 or codigoCongreso|length > 0 or codigoCurso|length > 0%}
+            <div class="docs">
+                <h2 hidden="">contenido</h2>
+                <h3 id="content" tabindex="17" class="norma scfocus">Listado de Certificados</h3>
+            </div>
+
+            <!-- Tabla desktop -->
+            <div class="table-responsive">
+            <table class="table">
+                <caption>Listado de Certificados</caption>
+                <thead class="thead-dark">
+                    <tr class="d-flex">
+                        <th tabindex="17" class="col hidden-sm" id="n">Apellido</th>
+                        <th tabindex="17" class="col hidden-sm" id="y">Nombre</th>
+                        <th tabindex="17" class="col" id="d">Dni</th>
+                        <th tabindex="17" class="col" id="c">curso/congreso</th>
+                        <th tabindex="17" class="col d-flex justify-content-around" id="d">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for certificado in certificados if certificado.estado == 'Aprobado' %}
+                        <tr class="d-flex">
+                            <td tabindex="17" headers="n" class="col hidden-sm" scope="row">{{certificado.alumno.persona.apellido}}</td>
+                            <td tabindex="17" headers="y" class="col titable hidden-sm">{{certificado.alumno.persona.nombre}}</td>
+                            <td tabindex="17" headers="d" class="titable">{{certificado.alumno.persona.dni}}</td>
+                            <td tabindex="17" headers="y" class="titable">{{certificado.curso}}</td>
+                            <td headers="d" class="col d-flex justify-content-around">
+                                <button tabindex="17" onclick="document.getElementById('{{ certificado.id }}').click()" class="btn btn-success" data-selector="true" data-toggle="tooltip" data-placement="top" title="Descargar" aria-label="Descargar">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <a id="{{ certificado.id }}" href="{{ path('admin_certificado_imprimir', {'id': certificado.id})}}" hidden target="_blank"></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% if codigoCurso %}
+                        {% if codigoCurso.estado == 'Aprobado' %}
+                            <tr class="d-flex">
+                                <td tabindex="17" headers="n" class="col hidden-sm" scope="row">{{codigoCurso.alumno.persona.apellido}}</td>
+                                <td tabindex="17" headers="y" class="col titable hidden-sm">{{codigoCurso.alumno.persona.nombre}}</td>
+                                <td tabindex="17" headers="d" class="titable">{{codigoCurso.alumno.persona.dni}}</td>
+                                <td tabindex="17" headers="y" class="titable">{{codigoCurso.curso}}</td>
+                                <td headers="d" class="col d-flex justify-content-around">
+                                    <button tabindex="17" onclick="document.getElementById('{{ codigoCurso.id }}').click()" class="btn btn-success" data-selector="true" data-toggle="tooltip" data-placement="top" title="Descargar" aria-label="Descargar">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <a id="{{ codigoCurso.id }}" href="{{ path('admin_certificado_imprimir', {'id': codigoCurso.id})}}" hidden target="_blank"></a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                    {% for certificado in certificadosCongreso %}
+                        <tr class="d-flex">
+                            <td tabindex="17" headers="n" class="col hidden-sm" scope="row">{{certificado.persona.apellido}}</td>
+                            <td tabindex="17" headers="y" class="col titable hidden-sm">{{certificado.persona.nombre}}</td>
+                            <td tabindex="17" headers="d" class="col titable">{{certificado.persona.dni}}</td>
+                            <td tabindex="17" headers="y" class="col titable">{{certificado.congreso}}</td>
+                            <td headers="d" class="col d-flex justify-content-around">
+                                <button tabindex="17" onclick="document.getElementById('{{ certificado.id }}').click()" class="btn btn-success" data-selector="true" data-toggle="tooltip" data-placement="top" title="Descargar" aria-label="Descargar">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <a id="{{ certificado.id }}" href="{{ path('certificado_congreso_imprimir', {'id': certificado.id})}}" hidden target="_blank"></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% if codigoCongreso %}
+                        <tr class="d-flex">
+                            <td tabindex="17" headers="n" class="col hidden-sm" scope="row">{{codigoCongreso.inscriptoCongreso.apellido}}</td>
+                            <td tabindex="17" headers="y" class="col titable hidden-sm">{{codigoCongreso.inscriptoCongreso.nombre}}</td>
+                            <td tabindex="17" headers="d" class="col titable">{{codigoCongreso.inscriptoCongreso.dni}}</td>
+                            <td tabindex="17" headers="y" class="col titable">{{codigoCongreso.congreso}}</td>
+                            <td headers="d" class="col d-flex justify-content-around">
+                                <button tabindex="17" onclick="document.getElementById('{{ codigoCongreso.id }}').click()" class="btn btn-success" data-selector="true" data-toggle="tooltip" data-placement="top" title="Descargar" aria-label="Descargar">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <a id="{{ codigoCongreso.id }}" href="{{ path('certificado_congreso_imprimir', {'id': codigoCongreso.id})}}" hidden target="_blank"></a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            </div>
+        {% elseif submitted %}
+            <div class="docs">
+                <h3 tabindex="17" class="norma">No hay elementos que coincidan con su búsqueda</h3>
+            </div>
+        {% endif %}
+    </section>
+    <hr>
+
+    <h4 hidden="">contenido</h4>
+    <h5 hidden="">contenido</h5>
+</main>{% endblock %}{% block focus %}
+<script>
+    jQuery(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+
+
+    });
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) 
+            return false;
+        
+        return true;
+    }
+
+    function showfocus() {
+        $('html,body').animate({
+            scrollTop: 480
+        }, 600);
+    }
+    function showfocusV(valor) {
+        $('html,body').animate({
+            scrollY: valor
+        }, 600);
+    }
+    function scrollear() {
+        window.scroll(0, 500);
+    }
+    $(".scfocus").focus(function () {
+        window.scrollBy(0, -140);
+    });
+</script>{% endblock %}
+

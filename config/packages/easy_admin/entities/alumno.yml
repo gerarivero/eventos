@@ -1,0 +1,50 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Alumno:
+            class: App\Entity\Alumno            
+            label: 'Alumnos'                                         
+            form:
+                fields:    
+                  - { property: 'persona', css_class: 'col-md-6' }              
+                  - { property: 'ocupacion', css_class: 'col-md-6' }
+                  - { property: 'nivelEducativo', css_class: 'col-md-6' }
+                  - { property: 'discapacidad', css_class: 'col-md-6' }
+                  - { property: 'tipoDiscapacidad', css_class: 'col-md-6' }
+                  - { property: 'cud', css_class: 'col-md-6' }
+                  - { property: 'vencCud', css_class: 'col-md-6' }
+                  - { property: 'apoyosTecnicos', css_class: 'col-md-6' }
+                  - { property: 'medioInfo', css_class: 'col-md-6', label: 'Medio de información por el cual accedió a la capacitación' }
+                  - { property: 'temasInteres', css_class: 'col-md-6', label: 'Temas de Interés' }
+            edit:
+                item_permission: 'ROLE_SUPER_ADMIN'
+            show:
+                item_permission: 'ROLE_SUPER_ADMIN'
+            new:
+                item_permission: 'ROLE_SUPER_ADMIN'
+            delete:
+                role: 'ROLE_SUPER_ADMIN'
+            list:
+                actions:
+                  - new
+                item_permission: 'ROLE_CURSO'                
+                fields:    
+                  - { property: 'persona.nombre', label: 'Nombre', css_class: 'col-md-6' }              
+                  - { property: 'persona.apellido', label: 'Apellido', css_class: 'col-md-6' }
+                  - { property: 'persona.dni', label: 'DNI', css_class: 'col-md-6' }
+                  - { property: 'discapacidad', css_class: 'col-md-6', template: 'backend/boolean.html.twig'}
+                  - { property: 'tipoDiscapacidad', css_class: 'col-md-6' }
+                  - { property: 'cud', css_class: 'col-md-6' , template: 'backend/boolean.html.twig'}
+                  - { property: 'vencCud', css_class: 'col-md-6' }                 
+                filters:           
+                  - { property: 'persona', css_class: 'col-md-6' }
+                  - { property: 'ocupacion', css_class: 'col-md-6' }
+                  - { property: 'nivelEducativo', css_class: 'col-md-6' }
+                  - { property: 'discapacidad', css_class: 'col-md-6' }
+                  - { property: 'tipoDiscapacidad', css_class: 'col-md-6' }
+                  - { property: 'cud', css_class: 'col-md-6' }
+                  - { property: 'vencCud', css_class: 'col-md-6' }
+                  - { property: 'apoyosTecnicos', css_class: 'col-md-6' }
+                  - { property: 'medioInfo', css_class: 'col-md-6', label: 'Medio de información por el cual accedió a la capacitación' }
+                  - { property: 'temasInteres', css_class: 'col-md-6', label: 'Temas de Interés' }
+            export:

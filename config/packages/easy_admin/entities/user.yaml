@@ -1,0 +1,36 @@
+parameters:
+  # ROLES
+  fos_roles: { 'ROLE_ALL': 'ROLE_ALL', 'ROLE_CURSO': 'ROLE_CURSO', 'ROLE_ADMIN_CONGRESO': 'ROLE_ADMIN_CONGRESO', 'ROLE_CURSO_ACREDITADOR': 'ROLE_CURSO_ACREDITADOR', 'ROLE_CONGRESO_ACREDITADOR': 'ROLE_CONGRESO_ACREDITADOR' }
+
+easy_admin:
+  formats:
+    date: 'd/m/Y'
+    time: 'h:i:s'
+  entities:
+    User:
+      class: App\Entity\User
+      role: ROLE_ALL
+      label: 'Usuarios'
+      list:
+        fields:
+          - 'username'
+          - 'email'
+          - 'enabled'
+          - { property: 'lastlogin', type: 'datetime', format: 'd/m/Y H:i' }
+      edit:
+        fields:
+          - { property: 'username', css_class: 'col-md-6' }
+          - { property: 'email', css_class: 'col-md-6' }
+          - { property: 'plainPassword', type: 'text', type_options: { required: false}, css_class: 'col-md-4' }
+          - { property: 'enabled', css_class: 'col-md-2' }
+          - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: '%fos_roles%' }, css_class: 'col-md-6' }
+        form_options: { validation_groups: ['Profile'] }
+      new:
+        fields:
+          - { property: 'username', css_class: 'col-md-6' }
+          - { property: 'email', css_class: 'col-md-6' }
+          - { property: 'plainPassword', type: 'text', type_options: { required: true}, css_class: 'col-md-4' }
+          - { property: 'enabled', css_class: 'col-md-2' }
+          - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: '%fos_roles%' }, css_class: 'col-md-6' }
+        form_options: { validation_groups: ['Registration'] }
+      export:

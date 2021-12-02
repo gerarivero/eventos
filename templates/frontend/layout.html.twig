@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        {% block head %}
+            <title>IPRODICH - Por una Inclusión Real</title>
+            <meta charset="utf-8" lang="es">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+            <link href="/static/css/fonts.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+            <link rel="icon" type="image/jpg" href="/static/images/logo_favicon.png"/>
+            {% block stylesheets %}
+                <link rel="stylesheet" href="/static/css/styles.css">
+                <link rel="stylesheet" href="/static/css/animate.css">
+                <style>
+                input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+input::placeholder {  
+                    color: #c7c7c7 !important;  
+                }
+                .smallplace::placeholder {  
+                    font-size: 0.82em;  
+                }
+                    .carousel-caption {
+                        color: rgba(0, 0, 0, 0.35);
+                        background-color: rgba(0, 0, 0, 0.35);
+                    }
+                    .skip {
+                        position: absolute;
+                        top: -1000px;
+                        left: -1000px;
+                        height: 1px;
+                        width: 1px;
+                        text-align: left;
+                        overflow: hidden;
+                    }
+
+                    .skip:active,
+                    .skip:focus,
+                    .skip:hover {
+                        left: 0;
+                        top: 0;
+                        width: auto;
+                        height: auto;
+                        overflow: visible;
+                    }
+                    .iprodich a.link-carousel {
+                        color: #ffffff;
+                        background-color: transparent;
+                    }
+                    .iprodich a.link-carousel:hover {
+                        color: #00ADF3;
+                        background-color: transparent;
+                    }
+
+                    #pauseButton,
+                    #playButton {
+                        margin-top: 50px;
+                    }
+                </style>
+            {% endblock %}
+        </head>
+        <body class="iprodich">
+            {% block scroll %}{% endblock %}
+            <!-- header -->
+            <header class="">
+                {% block botonCarrusel %}{% endblock %}
+                <a onclick="showfocus();
+                                            $('#content').focus();" href="#content" tabindex="1" class="skip" title="Saltar a leer el contenido principal de esta página">
+                    Saltar al contenido principal
+                </a>
+                <div class="container">
+                    <div class="navbar navbar-light">
+                        <div class="btn-menu"></div>
+                        <a id="logoPrincipal" tabindex="10" class="navbar-brand" href="/"><img class="logo" src="/static/images/logo.svg" alt="IPRODICH inicio"></a>
+                        <button class="navbar-toggler  d-flex justify-content-end" type="button" data-toggle="collapse" data-target="#buscadorPanel" aria-controls="buscadorPanel" aria-expanded="false" aria-label="Buscar"></button>
+                    </div>
+                </div>
+                <div class="redes hidden-sm">
+                    <ul class="d-flex justify-content-center align-items-center">
+                        <li class="ico-social">
+                            <a href="https://www.facebook.com/Iprodich/" tabindex="12" onfocus="cerrarBuscador();"><img src="/static/images/facebook.svg" data-toggle="tooltip" data-placement="top" title="Acceder a Facebook" alt="Facebook" class="img-fluid"></a>
+                        </li>
+                        <li class="ico-social">
+                            <a href="https://twitter.com/IPRODICH" tabindex="13"><img src="/static/images/twitter.svg" data-toggle="tooltip" data-placement="top" title="Acceder a Twitter" alt="Twitter" class="img-fluid"></a>
+                        </li>
+                        <li class="ico-social">
+                            <a href="https://www.instagram.com/iprodich/" tabindex="14"><img src="/static/images/instagram.svg" data-toggle="tooltip" data-placement="top" title="Acceder a Instagram" alt="Instagram" class="img-fluid"></a>
+                        </li>
+                        <li class="ico-social">
+                            <a href="https://www.youtube.com/channel/UCthHXPwOUm4Z3gvbBbPv9_A" tabindex="15"><img src="/static/images/youtube.svg" data-toggle="tooltip" data-placement="top" title="Acceder a Youtube" alt="Youtube" class="img-fluid"></a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+        {% endblock %}
+        {% block page %}{% endblock %}
+        {% block footer %}
+            <!-- footer -->
+            {{ render(controller('App\\Controller\\FrontendController::footerAction')) }}
+        {% endblock %}
+        {% block menu %}
+            {{ render(controller('App\\Controller\\FrontendController::menuAction')) }}
+        {% endblock %}
+        {% block javascripts %}
+            <!-- BOOTSTRAP -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        </body>
+    </html>
+</script>
+<script src="https://cdn.jsdelivr.net/gh/RobinHerbots/jquery.inputmask@5.0.0-beta.87/dist/jquery.inputmask.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/static/css/select2-bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+<!-- Script Personales -->
+<script src="{{ asset('static/js/grales.js') }}"></script>
+<script>
+
+    function cerrarBuscador() {
+        document.getElementById("buscadorPanel").className = document.getElementById("buscadorPanel").className.replace(/\bshow\b/, '');
+    }
+</script>
+{% block focus %}
+    <script>
+        function showfocus() {
+            $('html,body').animate({
+                scrollTop: 500
+            }, 600);
+        }
+        $(".scfocus").focus(function () {
+            window.scrollBy(0, -160);
+        });
+    </script>
+{% endblock %}{% endblock %}</body></html>
+

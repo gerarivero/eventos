@@ -1,0 +1,35 @@
+easy_admin:
+  entities:
+    Menu:
+      class: App\Entity\Menu      
+      form:
+        fields:
+          - { property: 'nombre' }
+          - { property: 'title' }
+          - { property: 'orden' }
+          - { property: 'noticia' }
+#          - { property: 'children', label: 'menu.children' }
+          - { property: 'parent', label: 'menu.parent' }          
+          - { property: 'ruta' }
+          - { property: 'url' }
+          - { property: 'activo' }
+      list:
+        fields:
+          - { property: 'nombre' }
+          - { property: 'title' }
+          - { property: 'orden' }
+          - { property: 'noticia' }          
+          - { property: 'ruta' }
+          - { property: 'url' }
+          - { property: 'activo' }
+      show:
+        fields:
+          - { property: 'nombre' }
+          - { property: 'title' }
+          - { property: 'orden' }
+          - { property: 'noticia' }
+          - { property: 'children', label: 'menu.children' }
+          - { property: 'parent', label: 'menu.parent' }          
+          - { property: 'ruta' }
+          - { property: 'url' }
+      export:

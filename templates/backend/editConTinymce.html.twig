@@ -1,0 +1,43 @@
+{% extends '@EasyAdmin/default/new.html.twig' %}
+{% block body_javascript %}
+    {{ parent() }}
+    <script type='text/javascript' src='{{ asset('static/js/Trumbowyg-master/dist/trumbowyg.min.js') }}'></script>
+            <!-- Include Editor style. -->
+            <link href='{{ asset('static/js/Trumbowyg-master/dist/ui/trumbowyg.min.css') }}' rel='stylesheet' type='text/css' />
+            <script type="text/javascript">
+                $('textarea').trumbowyg({
+                    semantic: false,
+                    resetCss: true
+                });
+            </script>
+            <script type="text/javascript" charset="utf-8">
+                document.addEventListener("click", function() {
+                    var elmsUrl = document.getElementsByName("url");
+                    for (var i = 0; i < elmsUrl.length; i++) {                
+                elmsUrl[i].setAttribute("id", "url");
+                elmsUrl[i].setAttribute("data-type", "elfinder-input-field");
+                }
+                });
+            live('click', '[data-type="elfinder-input-field"][id="url"]', function (event) {
+                console.warn('Test');
+                var childWin = window.open("/elfinder/imagen?id=url", "popupWindow", "height=450, width=900");
+            });
+            function live (eventType, elementQuerySelector, cb) {
+                document.addEventListener(eventType, function (event) {
+                    var qs = document.querySelectorAll(elementQuerySelector);
+                    if (qs) {
+                        var el = event.target, index = -1;
+                        while (el && ((index = Array.prototype.indexOf.call(qs, el)) === -1)) {
+                            el = el.parentElement;
+                        }
+                        if (index > -1) {
+                            cb.call(el, event);
+                        }
+                    }
+                })
+            }
+            function setValue(value, element_id) {
+                document.querySelector('[data-type="elfinder-input-field"]' + (element_id ? '[id="'+ element_id +'"]': '')).value = value;
+            }
+        </script>
+{% endblock %}

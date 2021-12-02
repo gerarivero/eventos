@@ -1,0 +1,61 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Persona:
+            class: App\Entity\Persona            
+            label: 'Personas'
+            form:
+                fields:
+                  - { property: 'activo', css_class: 'col-md-6' }
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'apellido', css_class: 'col-md-6' }
+                  - { property: 'email', css_class: 'col-md-6' }
+                  - { property: 'telefono', css_class: 'col-md-6' }
+                  - { property: 'telefonoFijo', css_class: 'col-md-6' }
+                  - { property: 'direccion', css_class: 'col-md-6' }
+                  - { property: 'dni', css_class: 'col-md-6' }
+                  - { property: 'fechaNacimiento', css_class: 'col-md-6' }
+                  - { property: 'localidad', css_class: 'col-md-6', type_options: {'group_by' : 'departamento'} }
+                  - { type: 'group', css_class: 'col-md-12', label: 'Alumno' }
+                  - { property: 'alumno', type: App\Form\AlumnoBackType, css_class: 'col-md-12', label: '' }             
+            list:
+                filters:                  
+                  - { property: 'activo', css_class: 'col-md-6', template: 'backend/boolean.html.twig'}
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'apellido', css_class: 'col-md-6' }
+                  - { property: 'email', css_class: 'col-md-6' }
+                  - { property: 'telefono', css_class: 'col-md-6' }
+                  - { property: 'direccion', css_class: 'col-md-6' }
+                  - { property: 'dni', css_class: 'col-md-6' }
+                  - { property: 'fechaNacimiento', css_class: 'col-md-6' }
+                  - { property: 'localidad', css_class: 'col-md-6' }
+                  - { property: 'alumno', css_class: 'col-md-6' }                  
+                  - { property: 'ocupacion', mapped: false, type: 'App\Form\Filter\OcupacionFilterType', css_class: 'col-md-6' }
+                  - { property: 'tipoDiscapacidad', mapped: false, type: 'App\Form\Filter\TipoDiscapacidadFilterType', css_class: 'col-md-6' }
+                  - { property: 'nivelEducativo', mapped: false, type: 'App\Form\Filter\NivelEducativoFilterType', css_class: 'col-md-6' }
+                  - { property: 'temasInteres', mapped: false, type: 'App\Form\Filter\TemasInteresFilterType', css_class: 'col-md-6' }
+                  - { property: 'apoyosTecnicos', mapped: false, type: 'App\Form\Filter\ApoyosTecnicosFilterType', css_class: 'col-md-6' }                   
+                fields:
+                  - { property: 'activo', css_class: 'col-md-6', template: 'backend/boolean.html.twig'}
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'apellido', css_class: 'col-md-6' }
+                  - { property: 'email', css_class: 'col-md-6' }
+                  - { property: 'telefono', css_class: 'col-md-6' }
+                  - { property: 'direccion', css_class: 'col-md-6' }
+                  - { property: 'dni', css_class: 'col-md-6' }
+                  - { property: 'fechaNacimiento', css_class: 'col-md-6' }
+                  - { property: 'localidad', css_class: 'col-md-6' }                  
+            show:
+                fields:
+                  - { property: 'activo', css_class: 'col-md-6' }
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'apellido', css_class: 'col-md-6' }
+                  - { property: 'email', css_class: 'col-md-6' }
+                  - { property: 'telefono', css_class: 'col-md-6' }
+                  - { property: 'telefonoFijo', css_class: 'col-md-6' }
+                  - { property: 'direccion', css_class: 'col-md-6' }
+                  - { property: 'dni', css_class: 'col-md-6' }
+                  - { property: 'fechaNacimiento', css_class: 'col-md-6' }
+                  - { property: 'localidad', css_class: 'col-md-6' }
+                  - { property: 'alumno', css_class: 'col-md-6' }
+            export:

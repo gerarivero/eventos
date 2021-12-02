@@ -1,0 +1,14 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Departamento:
+            class: App\Entity\Departamento         
+            label: 'Departamentos'
+            form:
+                fields:                 
+                 - { property: 'nombre'}                 
+            list:
+                fields:
+                 - { property: 'nombre'}
+                 - { property: 'localidades'}
+            export:

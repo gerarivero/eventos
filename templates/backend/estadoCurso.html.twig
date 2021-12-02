@@ -1,0 +1,17 @@
+{% if item.fechaInicio|date("Ymd") > "now"|date("Ymd")%}
+
+<button class="btn badge badge-pill badge-primary" type="button">
+        Idea
+</button>
+{% endif %}
+{% if item.fechaInicio|date("Ymd") <= "now"|date("Ymd") and item.fechaFin|date("Ymd") >= "now"|date("Ymd") %}
+<button class="btn badge badge-pill badge-success" type="button">
+        En curso
+</button>
+{% endif %}
+
+{% if item.fechaFin|date("Ymd") < "now"|date("Ymd")%}
+<button class="btn badge badge-pill badge-warning" type="button">
+        Finalizado
+</button>
+{% endif %}

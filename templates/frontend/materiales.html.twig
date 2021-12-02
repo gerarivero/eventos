@@ -1,0 +1,62 @@
+{% extends 'frontend/layout.html.twig' %}
+{% block page %}
+<style>
+.card-img-top {
+    max-height: 200px;
+}
+.card-text {
+    overflow: hidden;
+    max-height: 10ch;
+}
+
+.h2, h2 {
+    font-size: 1.5em !important;
+}
+</style>
+    <div class="container-fluid content-row">
+        <main class="container">
+        <!-- Ultima Noticia -->
+        <section class="ultimate">
+            <div class="listatit">
+                <h1 tabindex="17" class="scfocus"><span class="go"><img src="/static/images/go.svg" alt="ir"></span>Materiales</h1>
+                <hr>
+            </div>
+            <nav aria-label="breadcrumb" class="hidden-sm">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="http://iprodich.gob.ar" tabindex="16">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{path('cursos')}}" tabindex="16">Cursos</a>
+                    </li>
+                    <li aria-current="page" class="breadcrumb-item active" tabindex="16">                    
+                        Materiales
+                    </li>
+                </ol>
+            </nav>
+        <div class="row">
+            <div id="content" tabindex="17" class="col-md-12">
+            <div class="row">
+            {% for curso in cursos if curso.materiales|length > 0 and curso.publicado == true %}            
+            <div class="col-sm-12 col-md-4 d-flex align-items-stretch pb-3">
+                <div class="card h-100 d-flex">
+                    <div class="card-body d-flex flex-column">
+                        <h2 tabindex="17" class="card-title">{{curso.nombre}}</h2>
+                        {% for material in curso.materiales %}
+                            <li>
+                                <a tabindex="17" href="{{ asset('uploads/cursos/'~ material.path) }}" class="descarga" tabindex="18" title="Descargar archivo">
+                                    <span class="down"></span>
+                                    <span class="txt-down">{{material.alt}}</span>
+                                </a>
+                            </li>
+                            {% endfor %}
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>        
+        </section>
+    </div>
+
+{% endblock %}

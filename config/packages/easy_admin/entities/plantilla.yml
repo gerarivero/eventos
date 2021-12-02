@@ -1,0 +1,60 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Plantilla:
+            class: App\Entity\Plantilla            
+            label: 'Plantillas - Certificados'
+            form:
+                fields:
+                 - { type: 'group', css_class: 'col-md-12', label: 'Nombre de Plantilla' }
+                 - { property: 'nombre', label: 'Nombre de Plantilla' }
+                 - { type: 'group', css_class: 'col-md-12', label: 'Fuente' }
+                 - { property: 'fontFamily', label: 'Familia', type: choice, type_options: { choices: {'sans-serif':'sans-serif', 'serif':'serif', 'monospace':'monospace', 'cursive':'cursive', 'fantasy':'fantasy', 'DaxlinePro-Bold':'DaxlinePro-Bold'} }}
+                 - { property: 'fontStyle', label: 'Estilo', type: choice, type_options: { choices: {'normal':'normal', 'italic':'italic', 'oblique':'oblique'} }}
+                 - { property: 'fontWeight', label: 'Peso', type: choice, type_options: { choices: {'normal':'normal', 'bold':'bold'} }}
+                 - { type: 'group', css_class: 'col-md-12', label: 'Imagen de Fondo' }
+                 - { property: 'imageFile', type: 'vich_image', label: 'Imagen' }                 
+                 - { type: 'group', css_class: 'col-md-12', label: 'Título' }
+                 - { property: 'titulo', label: 'Título' }
+                 - { property: 'tituloSize', label: 'Tamaño de Título' }
+                 - { property: 'tituloMargin', label: 'Margen de Título' }
+                 - { type: 'group', css_class: 'col-md-12', label: 'Nombre' }
+                 - { property: 'nombreMT', label: 'Posicion Desde Arriba (en mm)' }                 
+                 - { property: 'nombreSize', label: 'Tamaño de fuente (en px)' }
+                 - { type: 'group', css_class: 'col-md-12', label: 'DNI' }
+                 - { property: 'mostrarDni', label: 'mostrar Dni?' }                 
+                 - { property: 'DniSize', label: 'Tamaño (en px)' }
+                 - { property: 'DniMT', label: 'Posicion Desde Arriba (en mm)' }
+                 - { property: 'DniML', label: 'Posicion Desde Izquierda (en mm)' }
+                 - { type: 'group', css_class: 'col-md-12', label: 'Calidad de Participación' }                 
+                 - { property: 'mostrarParticipacion', label: 'mostrar calidad de Participación?' }
+                 - { property: 'DniParticipacionSize', label: 'Tamaño (en px)' }
+                 - { property: 'DniParticipacionMT', label: 'Posicion Desde Arriba (en mm)' }
+                 - { property: 'DniParticipacionML', label: 'Posicion Desde Izquierda (en mm)' }
+                 - { type: 'group', css_class: 'col-md-12', label: 'Titulo Evento' }                 
+                 - { property: 'cursoSize', label: 'Tamaño de Título del evento' }
+                 - { property: 'cursoMargin', label: 'Margen de Título del evento' }
+                 - { type: 'group', css_class: 'col-md-12', label: 'QR' }
+                 - { property: 'qr' }
+                 - { property: 'qrMT', label: 'Posicion Desde Arriba (en mm)' }
+                 - { property: 'qrML', label: 'Posicion Desde Izquierda (en mm)' }
+                 - { property: 'qrSize', label: 'Tamaño (en px)' }
+                 - { type: 'group', css_class: 'col-md-12', label: 'Asistencia' }
+                 - { property: 'mostrarAsistencia' }
+                 - { property: 'asistenciaMT', label: 'Posicion Desde Arriba (en mm)' }
+                 - { property: 'asistenciaML', label: 'Posicion Desde Izquierda (en mm)' }
+                 - { property: 'asistenciaSize', label: 'Tamaño (en px)' }
+                 - { type: 'group', css_class: 'col-md-12', label: 'Duracion' }
+                 - { property: 'mostrarDuracion' }
+                 - { property: 'duracionMT', label: 'Posicion Desde Arriba (en mm)' }
+                 - { property: 'duracionML', label: 'Posicion Desde Izquierda (en mm)' }
+                 - { property: 'duracionSize', label: 'Tamaño (en px)' }
+                 - { type: 'group', css_class: 'col-md-12', label: 'Codigo' }                 
+                 - { property: 'codigoMT', label: 'Posicion Desde Arriba (en mm)' }
+                 - { property: 'codigoML', label: 'Posicion Desde Izquierda (en mm)' }
+                 - { property: 'codigoSize', label: 'Tamaño (en px)' }       
+            list:
+                fields:
+                 - { property: 'path', type: 'image', base_path: '%path.imagenesCursos%' }                
+                 - { property: 'nombre' }
+            export:

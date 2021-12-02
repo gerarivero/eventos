@@ -1,0 +1,64 @@
+parameters:
+  # ROLES
+  estados: { 'Pre-inscripto': 'Pre-inscripto', 'Inscripto': 'Inscripto', 'Aprobado': 'Aprobado', 'Desaprobado': 'Desaprobado' }
+
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Inscripcion:
+            class: App\Entity\Inscripcion            
+            label: 'Inscripciones'
+            edit:
+                item_permission: 'ROLE_SUPER_ADMIN'
+            new:
+                item_permission: 'ROLE_SUPER_ADMIN'                  
+            list:
+                batch_actions: 
+                    - { name: 'notificarInscriptosSms', icon: 'pencil', css_class: btn btn-info, label: "Notificar" }
+                    - { name: 'cambiarEstadoPreInscripto', css_class: btn btn-warning, label: "Pre-Inscripto" }
+                    - { name: 'cambiarEstadoInscripto', icon: 'pencil', css_class: btn btn-primary, label: "Inscripto" }
+                    - { name: 'cambiarEstadoAprobado', icon: 'pencil' , css_class: btn btn-success, label: "Aprobado" }
+                    - { name: 'cambiarEstadodesaprobado', icon: 'pencil', css_class: btn btn-danger , label: "Desaprobado" }
+                    - { name: 'delete', icon: 'ban' }
+                fields:                
+                    - { property: 'alumno.persona.nombre', label: 'Nombre', css_class: 'col-md-6' }
+                    - { property: 'alumno.persona.apellido', label: 'Apellido', css_class: 'col-md-6' }
+                    - { property: 'alumno.persona.dni', label: 'DNI', css_class: 'col-md-6' }
+                    - curso
+                    - { property: 'estado', template: 'backend/estado.html.twig',
+                        label_colors: ['primary', 'success', 'info'] }                    
+                    - { property: 'ultimaNotificacion' }
+                    - { property: 'porcAsistencia', label: '% Asist.' }
+                    - { property: 'alumno.listTipoDiscapacidad', label: 'Tipos de Disc.' }
+                    - { property: 'alumno.apoyosTecnicos', label: 'Apoyos Téc.' }
+                    - codigo
+                export:                
+                    - { property: 'alumno.persona.nombre', label: 'Nombre', css_class: 'col-md-6' }
+                    - { property: 'alumno.persona.apellido', label: 'Apellido', css_class: 'col-md-6' }
+                    - { property: 'alumno.persona.dni', label: 'DNI', css_class: 'col-md-6' }
+                    - curso
+                    - { property: 'estado', template: 'backend/estado.html.twig',
+                        label_colors: ['primary', 'success', 'info'] }                    
+                    - { property: 'ultimaNotificacion' }
+                    - { property: 'porcAsistencia', label: '% Asist.' }
+                    - { property: 'alumno.listTipoDiscapacidad', label: 'Tipos de Disc.' }
+                    - { property: 'alumno.apoyosTecnicos', label: 'Apoyos Téc.' }
+                    - codigo
+                filters:                  
+                    - { property: 'estado', type: 'App\Form\Filter\EstadoFilterType', css_class: 'col-md-6' }
+                    - alumno
+                    - curso
+                    - { property: 'porcAsistencia', label: 'Asistencia', type: 'App\Form\Filter\AsistenciaFilterType', css_class: 'col-md-6' }
+                actions:
+                    - { name: 'enviarWhatsapp', icon: 'pencil', label: false, title: 'Enviar Whatsapp', template: 'backend/whatsapp.html.twig'}
+                    - { name: 'enviarSms', icon: 'sms', label: false}
+                    #- { name: 'imprimirCertificadoAdmin', icon: 'print', label: false}
+                    - { name: 'admin_certificado_imprimir', type: 'route', icon: 'print', label: false}
+            form:
+                fields:                
+                    - alumno
+                    - curso
+                    - { property: 'estado', type: 'choice', type_options: { multiple: false, choices: '%estados%' }, css_class: 'col-md-6' }                    
+                    #- { property: 'ultimaNotificacion' }
+                    - porcAsistencia
+            export:

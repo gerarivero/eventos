@@ -1,0 +1,41 @@
+<!-- Menu Panel -->
+<!-- Boton de menu -->
+<div id="btn-menu" class="b-menu">
+    <span aria-label="Menú contraído, tecla enter para recorrer, tecla tab para continuar" class="ico-burguer" tabindex="2" accesskey="m"></span>
+</div>
+<!-- fullscreen-menu -->
+<div class="full-menu">
+	<div class="container">
+		<nav class="navegacion">
+			<ul class="menu-principal">
+                                {% for menu in menues %}
+                                    {% set href = '#' %}
+                                    {% if menu.parent|length < 1 %}
+                                       {% if menu.ruta is not null %}                                           
+                                        <li class="item"><a class="hiddenshow" href="{{ path(menu.ruta)}}" tabindex="-1" title="{{menu.title}}">{{menu.nombre}}</a>
+                                       {% elseif menu.url is not null %}
+                                       <li class="item"><a class="hiddenshow" href="{{ menu.url }}" tabindex="-1" title="{{menu.title}}">{{menu.nombre}}</a>
+                                       {% else %}
+                                       <li class="item"><a class="hiddenshow" href="#" tabindex="-1" title="{{menu.title}}">{{menu.nombre}}</a>
+                                       {% endif %}
+                                    {% endif %}
+                                    {% if menu.children|length > 0 %}
+                                        <ul>
+                                    {% for menuhijo in menu.children %}
+                                        
+                                       {% if menuhijo.ruta is not null %}                                           
+                                        <li class="subitem"><a class="hiddenshow" href="{{ path(menuhijo.ruta)}}" tabindex="-1" title="{{menuhijo.title}}">{{menuhijo.nombre}}</a></li>
+                                       {% elseif menuhijo.url is not null %}
+                                       <li class="subitem"><a class="hiddenshow" href="{{ menuhijo.url }}" tabindex="-1" title="{{menuhijo.title}}">{{menuhijo.nombre}}</a></li>
+                                       {% else %}
+                                       <li class="subitem"><a class="hiddenshow" href="#" tabindex="-1" title="{{menuhijo.title}}">{{menuhijo.nombre}}</a></li>
+                                       {% endif %}
+                                    {% endfor %}
+                                    </ul>
+                                    </li>
+                                    {% endif %}                                    
+                                    {% endfor %}				
+			</ul>
+		</nav>
+	</div>
+</div>

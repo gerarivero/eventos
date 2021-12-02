@@ -1,0 +1,44 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        InscripcionCongreso:
+            class: App\Entity\InscripcionCongreso            
+            label: 'Inscripciones - Congreso'
+            search:
+                fields:
+                    - { property: 'persona.nombre', label: 'Nombre', css_class: 'col-md-6' }
+                    - { property: 'persona.apellido', label: 'Apellido', css_class: 'col-md-6' }
+                    - { property: 'persona.dni', label: 'DNI', css_class: 'col-md-6' }
+                    - congreso
+                    - condicion             
+                    - porcAsistencia
+                    - codigo                
+            list:                
+                batch_actions: 
+                    - { name: 'delete', icon: 'ban' }
+                fields:                
+                    - { property: 'persona.nombre', label: 'Nombre', css_class: 'col-md-6' }
+                    - { property: 'persona.apellido', label: 'Apellido', css_class: 'col-md-6' }
+                    - { property: 'persona.dni', label: 'DNI', css_class: 'col-md-6' }
+                    - congreso
+                    - condicion             
+                    - porcAsistencia
+                    - codigo
+                    - { property: 'acreditacions', label: 'Estado', template: 'backend/acreditacion.html.twig',
+                        label_colors: ['primary', 'success', 'info'] }
+                filters:
+                    - persona                  
+                    - congreso
+                    - condicion             
+                    - { property: 'porcAsistencia', label: 'Asistencia', type: 'App\Form\Filter\AsistenciaFilterType', css_class: 'col-md-6' }
+                actions:                    
+                    - { name: 'certificado_congreso_imprimir', type: 'route', icon: 'print', label: false, target: '_blank' }
+            form:
+                fields:
+                    - { property: 'persona', css_class: 'col-md-6', label: 'Persona' }
+                    - congreso
+                    - { property: 'condicion', css_class: 'col-md-6', label: 'Condicion', type: choice, type_options: { choices: {'Asistente':'Asistente', 'Colaborador':'Colaborador', 'Participante':'Participante', 'Disertante':'Disertante', 'Organizador':'Organizador', 'Stand':'Stand', 'Prensa':'Prensa'} }}
+                    - { property: 'porcAsistencia', css_class: 'col-md-6', label: 'Porcentaje de Asistencia' }
+                    - lugarAdquisicion
+                    - codigoCupon
+            export:

@@ -1,0 +1,71 @@
+{% extends '@EasyAdmin/default/layout.html.twig' %}
+{% block content_title %}
+    {% apply spaceless %}
+        {% set _default_title = 'Acreditaciones - ' ~ congreso ~ ' - ' ~ fecha|date("d/m/Y")%}
+        {{ _entity_config.new.title is defined ? _entity_config.new.title|trans(_trans_parameters) : _default_title }}
+    {% endapply %}
+{% endblock %}
+{% block main %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    function acreditarAjax(id, action){   
+  $.ajax({url: "{{path('ajax_acreditar')}}",
+    type: "POST",
+    data: {id: id, fecha: "{{fecha|date("d-m-Y")}}", action: action },
+    success: function() {
+        
+    }    
+  });
+
+}
+    $(document).ready(function() {
+        $('#table_id').dataTable( {
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+            }
+        } );
+        $(":checkbox").change(function(){
+if($(this).is(':checked')) acreditarAjax($(this).data("id"), "add");
+else acreditarAjax($(this).data("id"), "remove");
+});
+    } );
+</script>
+    {% block entity_form %}
+    <table id="table_id" class="display">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Acreditado</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for inscripcion in congreso.inscripciones %}
+        <tr>
+            <td>{{inscripcion.persona.nombre}}</td>
+            <td>{{inscripcion.persona.apellido}}</td>
+            <td>{{inscripcion.persona.dni}}</td>
+            <td class=" toggle">
+                            
+    <div class="checkbox-switch">
+        <label>
+            {% if inscripcion.isAcreditado(fecha) %}
+            <input type="checkbox" data-id="{{inscripcion.id}}" checked>
+            {% else %}
+            <input type="checkbox" data-id="{{inscripcion.id}}"> 
+            {% endif %} 
+            <span></span>
+        </label>
+    </div>
+
+                        </td>
+        </tr>
+    {% endfor %}   
+    </tbody>
+</table>
+        
+    {% endblock entity_form %}
+{% endblock %}

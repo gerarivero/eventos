@@ -1,0 +1,16 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Docente:
+            class: App\Entity\Docente            
+            label: 'Docentes'            
+            form:
+                fields:
+                  - { property: 'activo', css_class: 'col-md-6', template: 'backend/boolean.html.twig'}
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'apellido', css_class: 'col-md-6' }
+                  - { property: 'email', css_class: 'col-md-6' }
+                  - { property: 'telefonos', css_class: 'col-md-6' }
+                  - { property: 'direcciones', css_class: 'col-md-6' }
+                  - { property: 'dni', css_class: 'col-md-6' }
+            export:                          

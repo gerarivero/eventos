@@ -1,0 +1,56 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Curso:
+            class: App\Entity\Curso            
+            label: 'Cursos'
+            form:
+                fields:
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'clave', label: 'Clave para estadísticas', css_class: 'col-md-6' }
+                  - { property: 'detalles', css_class: 'col-md-6' }
+                  - { type: 'group', css_class: 'col-md-12', label: 'Imagen' }
+                  - { property: 'imageFile', type: 'vich_image', label: 'Imagen' }
+                  - { type: 'group', css_class: 'col-md-12', label: 'Materiales' }
+                  - { property: 'materiales', label: 'Documento', type: 'collection', type_options: { entry_type: 'App\Form\ResourceType', by_reference: false }, css_class: 'col-md-12'}                          
+                  - { property: 'fechaInicio', css_class: 'col-md-6' }
+                  - { property: 'fechaFin', css_class: 'col-md-6' }
+                  - { property: 'fechaInicioInscripcion', css_class: 'col-md-6' }
+                  - { property: 'fechaFinInscripcion', css_class: 'col-md-6' }
+                  - { property: 'lugar', css_class: 'col-md-6' }
+                  - { property: 'organizador', css_class: 'col-md-6' }
+                  - { property: 'coOrganizador', css_class: 'col-md-6' }
+                  - { property: 'duracion', css_class: 'col-md-6' }
+                  - { property: 'objetivos', css_class: 'col-md-6' }
+                  - { property: 'docentes', css_class: 'col-md-6' }
+                  - { property: 'cupo', css_class: 'col-md-6' }
+                  - { property: 'plantilla', css_class: 'col-md-6', label: 'Plantilla de Certificado' }
+                  - { property: 'publicado', css_class: 'col-md-6' }
+            list:
+                fields:
+                  - { property: 'nombre', css_class: 'col-md-6' }                             
+                  - { property: 'fechaInicio', css_class: 'col-md-6' }
+                  - { property: 'fechaFin', css_class: 'col-md-6' }
+                  - { property: 'fechaInicioInscripcion', css_class: 'col-md-6' }
+                  - { property: 'fechaFinInscripcion', css_class: 'col-md-6' }
+                  - { property: 'estado', template: 'backend/estadoCurso.html.twig',
+                        label_colors: ['primary', 'success', 'info'], mapped: false }
+                  - { property: 'publicado', css_class: 'col-md-6', template: 'backend/boolean.html.twig'}              
+                actions: ['verInscriptos']
+                filters:                  
+                  - { property: 'nombre', css_class: 'col-md-6' }
+                  - { property: 'detalles', css_class: 'col-md-6' }                  
+                  - { property: 'fechaInicio', css_class: 'col-md-6' }
+                  - { property: 'fechaFin', css_class: 'col-md-6' }
+                  - { property: 'fechaInicioInscripcion', css_class: 'col-md-6' }
+                  - { property: 'fechaFinInscripcion', css_class: 'col-md-6' }
+                  - { property: 'lugar', css_class: 'col-md-6' }
+                  - { property: 'duracion', css_class: 'col-md-6' }
+                  - { property: 'objetivos', css_class: 'col-md-6' }
+                  - { property: 'docentes', css_class: 'col-md-6' }
+                  - { property: 'cupo', css_class: 'col-md-6' }
+                  - { property: 'publicado', css_class: 'col-md-6' }
+            show:
+                item_permission: 'ROLE_SUPER_ADMIN'
+            export:              
+                                    

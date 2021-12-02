@@ -1,0 +1,87 @@
+{% extends '@EasyAdmin/default/layout.html.twig' %}
+{% block content_title %}
+    {% apply spaceless %}
+    {% set _default_title = 'Estadísticas del Evento' %}
+    {{ _entity_config.new.title is defined ? _entity_config.new.title|trans(_trans_parameters) : _default_title }}
+    {% endapply %}
+{% endblock %}
+{% block main %}
+    {% block entity_form %}
+        <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+    {% endblock entity_form %}
+{% endblock %}
+{% block body_javascript %}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script>
+        $('document').ready(function () {
+            setInterval(function () {
+                getRealData()
+            }, 3000); // request every x seconds
+        });
+
+        function getRealData() {
+            $.ajax({
+                url: '{{ path('get_acreditados_congreso') }}',
+                type: 'GET',
+                data: {
+                    "idCongreso": {{ congreso.id }}
+                },
+                error: function (err) {
+                    console.log('Error!', err)
+                },
+                success: function (data) {
+                    console.log('Success!')
+                    console.log(data);
+                    // Build the chart
+                    Highcharts.chart('container', {
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'pie',
+                            animation: false,
+                        },
+                        title: {
+                            text: 'CID Chaco 2019'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                showInLegend: true,
+                                animation: {
+                                    duration: 0
+                                }
+                            }
+                        },
+                        series: [
+                            {
+                                name: 'Brands',
+                                colorByPoint: true,
+                                data: [
+                                    {
+                                        name: 'Acreditados',
+                                        y: 61.41
+                                    }, {
+                                        name: 'No Acreditados',
+                                        y: 11.84
+                                    }
+                                ]
+                            }
+                        ]
+                    });
+                }
+            })
+        }
+    </script>
+{% endblock body_javascript %}

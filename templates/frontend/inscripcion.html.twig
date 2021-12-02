@@ -1,0 +1,435 @@
+{% extends 'frontend/layout.html.twig' %}
+{% block stylesheets %}
+ {{ parent() }}
+ <link rel="stylesheet" href="{{ asset('css/switch.css') }}">
+ <style>
+ label {
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+#app_alumno_alumno_tipoDiscapacidad {
+    margin-left: .5rem;
+}
+    label.required:after {
+    content: " *";
+    color: red;
+
+    .select2 {
+    width: 100% !important;
+}
+
+.select2-container--bootstrap {
+    width: 100% !important;
+}
+
+}
+.checkbox-2x {
+    transform: scale(2);
+    -webkit-transform: scale(2);
+}
+.form-check {
+    margin: .5rem;
+}
+ </style>
+ {% endblock %}
+{% block page %}
+    
+    <div class="container">
+        
+        
+        <div class="listatit">
+            <h1 class="scfocus" tabindex="16">
+                <span class="go"><img alt="ir" src="/static/images/go.svg"></span>Formulario de Pre Inscripción</h1>
+            <hr>
+        </div>
+        <nav aria-label="breadcrumb" class="hidden-sm">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="http://iprodich.gob.ar" tabindex="16">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{path('cursos')}}" tabindex="16">Cursos</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{path('detalles_curso', {'idCurso': curso.id})}}" tabindex="16">Detalles</a>
+                    </li>
+                    <li aria-current="page" class="breadcrumb-item active" tabindex="16">                    
+                        Inscripción
+                    </li>
+                </ol>
+            </nav>
+        <div class="docs">
+			<h2 tabindex="16">Curso: {{curso.nombre}}</h2>
+		</div>        
+        <h3 tabindex="16" class="h5">Para inscribirse seleccione una de estas dos opciones:</h3>                
+        <div class="form-row" id="poseeCertificado">
+        <div class="form-group col-sm-12 col-md-6">
+      <label class="btn btn-primary btn-lg btn-block col-sm-12">
+        <input tabindex="16" onclick="display(true);" type="radio" name="options" id="option1"> Tengo Certificado <br> Único de Discapacidad
+      </label>
+      </div>
+      <div class="form-group col-sm-12 col-md-6">
+      <label class="btn btn-success btn-lg btn-block col-sm-12">
+        <input tabindex="16" onclick="display(false);" type="radio" name="options" id="option2"> No tengo Certificado <br>Único de Discapacidad
+      </label>
+      </div>
+      </div>
+        <form action="javascript:void(0);">
+            <div class="form-row" id="buscarCud" style="display:none;">
+                <div class="form-group col-sm-12 col-md-12">
+                    <label for="cud" hidden="">Ingrese número de CUD"</label>
+                    <input class="form-control smallplace visible-sm" id="cudsm" name="cudsm" placeholder="Ingrese número de CUD (Ej. 12345678-9)" required="required" tabindex="16" title="Ingrese número de Certificado Único de Discapacidad, debe contener ocho números un guión y luego un número y se encuentra en la parte superior derecha del certificado" type="text" data-toggle="tooltip" data-placement="bottom" data-inputmask="'mask': '99999999-9'">
+                    <input class="form-control hidden-sm" id="cudlg" name="cudlg" placeholder="Ingrese número de CUD (Ej. 12345678-9)" required="required" tabindex="16" title="Ingrese número de Certificado Único de Discapacidad, debe contener ocho números un guión y luego un número y se encuentra en la parte superior derecha del certificado (ver imagen de ejemplo debajo del formulario)" type="text" data-toggle="tooltip" data-placement="bottom" data-inputmask="'mask': '99999999-9'">
+                </div>
+                <div class="form-group col-sm-12 col-md-12">
+                    <button class="btn btn-info btn-lg btn-block scfocus" onclick="consultarCud();" tabindex="16" type="submit" type="submit">BUSCAR</button>
+                </div>
+                <div class="row justify-content-md-center">
+                <div class="shadow rounded col-sm-12 col-md-6">
+                    <img tabindex="16" class="img-fluid" alt="ejemplo de certificaco único de discapacidad, con código en la zona superior derecha" src="{{ asset('images/cud.png') }}">    
+                </div>
+             </div>
+            </div>            
+        </form>
+        <br>
+        <div class="row" id="encontrado" style="display:none;">
+            <div class="col col-lg-12">
+                <div tabindex="16" class="alert alert-success" role="alert">
+                    Usted se encuentra en el registro de personas con discapacidad, por favor complete los datos a continuación
+                </div>
+            </div>
+        </div>
+        <div class="row" id="noencontrado" style="display:none;">
+            <div class="col col-lg-12">
+                <div tabindex="16" class="alert alert-warning" role="alert">
+                    Usted no se encuentra en el registro de personas con discapacidad, por favor complete los datos a continuación
+                </div>
+            </div>
+        </div>
+        {% for label, messages in app.flashes(['warning', 'error', 'success']) %}
+            {% for message in messages %}
+                <div tabindex="16" class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% endfor %}
+        <div id="form" style="display:none;">
+            {{ form_start(form, {'action': path('inscripcion', {'idCurso': curso.id}), 'method': 'POST', 'attr': {'id': 'datos'}}) }}
+            
+            {#{% if not form.vars.valid %}
+                <div class="row">
+                    <div class="form-group col-sm-12 col-md-12">
+                        <ul>                
+                            {% for child in form.children %}                    
+                                {%for error in child.vars.errors%}
+                                    <li>
+                                        <span class="invalid-feedback d-block">
+                                            <span class="d-block">
+                                                <span class="form-error-icon badge badge-danger text-uppercase">Error</span>
+                                                <span class="form-error-message">{{error.message}}</span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    {%endfor%}
+                            {%endfor%}
+                        </ul>
+                    </div>
+                </div>
+            {%endif%}#}
+
+            <div class="row row-sm-offset">
+            
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.nombre) }}
+                    </div>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.apellido) }}
+                    </div>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.dni) }}
+                    </div>
+                    <span hidden="hidden" id="tip1" class="tooltip" role="tooltip">Este campo solo acepta números</span>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                <div class="form-group">
+                        <label class="required" tabindex="16" title="Fecha de nacimiento, seleccione día, mes y año">Fecha de nacimiento, seleccione día, mes y año</label>
+                        </div>
+                        <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.fechaNacimiento.day, {'attr': {'class': 'form-control', 'tabindex': '16'}}) }}
+                        </div>
+                        <div class="col">
+                        {{ form_widget(form.fechaNacimiento.month, {'attr': {'class': 'form-control', 'tabindex': '16'}}) }}
+                        </div>
+                        <div class="col">
+                        {{ form_widget(form.fechaNacimiento.year, {'attr': {'class': 'form-control', 'tabindex': '16'}}) }}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.telefono) }}
+                    </div>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.alumno.cud) }}
+                    </div>
+                </div>                
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.telefonoFijo) }}
+                    </div>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.direccion) }}
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {{ form_row(form.localidad) }}
+                    </div>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.email) }}
+                    </div>
+                    <span hidden="hidden" id="tip2" class="tooltip" role="tooltip">Este campo requiere formato de correo electrónico (Ejemplo: nombre@mail.com)</span>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.alumno.ocupacion) }}
+                    </div>
+                </div>                               
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.alumno.nivelEducativo) }}
+                    </div>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                <div class="form-group">
+                <span class="switch">
+                    {{ form_widget(form.alumno.discapacidad) }}
+                    {{ form_label(form.alumno.discapacidad) }}
+                </span>
+                </div>
+                </div>        
+                
+                <div id="tiposDiscapacidad" class="col-md-12 multi-horizontal" style="display:none;">
+                    <div class="form-group">
+                        {{ form_row(form.alumno.tipoDiscapacidad) }}
+                    </div>
+                </div>
+                
+                {#<div id="vencCud" class="col-md-12 multi-horizontal">
+                <div class="form-group">
+                        {{ form_label(form.alumno.vencCud) }}
+                        </div>
+                        
+                        <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.alumno.vencCud.day, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="col">
+                        {{ form_widget(form.alumno.vencCud.month, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="col">
+                        {{ form_widget(form.alumno.vencCud.year, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    </div>
+                </div>#}
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.alumno.apoyosTecnicos) }}
+                    </div>
+                </div>                
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.alumno.medioInfo) }}
+                    </div>
+                </div>
+                <div class="col-md-12 multi-horizontal">
+                    <div class="form-group">
+                        {{ form_row(form.alumno.temasInteres) }}
+                    </div>
+                </div>        
+                <hr>
+                <div class="col-md-12 multi-horizontal">
+                    <button tabindex="16" type="submit" class="btn btn-info btn-lg btn-block">ENVIAR</button>
+                </div>
+                <hr>
+            </div>
+            
+            {{ form_end(form) }}
+            <br>
+                <br>
+        </div>
+    </div>
+   
+    
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="https://www.google.com/recaptcha/api.js?render=6Lc5MrsUAAAAAA9xqEMOOXHrVyzNhvocjnNn8cj0"></script>
+<script>
+grecaptcha.ready(function() {    
+    grecaptcha.execute('6Lc5MrsUAAAAAA9xqEMOOXHrVyzNhvocjnNn8cj0', {action: 'homepage'}).then(function(token) {
+       $('#datos').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+    });
+});
+</script>
+<script>
+    $(":input").inputmask({removeMaskOnSubmit: true});
+    $("#datos").on("submit", "form", function (e) {
+    alert("hola");
+})
+$(document).ready(function(){   
+    if ($('#app_alumno_alumno_cud').is(":checked")){
+        $('#option2').trigger('click');
+    }
+    
+    
+  $('#app_alumno_localidad').select2({
+        theme: 'bootstrap',
+        allowClear: true,
+        placeholder: "Seleccione una localidad",
+        language: 'es',
+        width: '100%'
+      });
+});
+    </script>
+    
+    <script>
+        function display(cud) {            
+            if(cud == false){
+                document.getElementById('form').style.display = "block";
+                document.getElementById('buscarCud').style.display = "none";
+                $('#app_alumno_alumno_cud').prop('checked', true);                
+                //document.getElementById('vencCud').style.display = "none";
+            } else {
+                document.getElementById('buscarCud').style.display = "block";
+                document.getElementById('form').style.display = "none";
+                $('#app_alumno_alumno_cud').prop('checked', false);
+                //document.getElementById('vencCud').style.display = "block";
+            }
+        }
+        function displayDiscapacidades() {
+            var checkBox = document.getElementById("app_alumno_alumno_discapacidad");
+  // Get the output text
+  var text = document.getElementById("tiposDiscapacidad");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+        }
+        function consultarCud() {
+            var jscud = document.getElementById('cudsm').value;
+            if(jscud == ""){
+                jscud = document.getElementById('cudlg').value;    
+            }
+            var url = '{{ path('cud', {'cud': 'cudjs'}) }}';
+            url = url.replace("cudjs", jscud);
+            $.ajax({
+                url: url,
+                type: 'GET',
+                error: function (err) {
+                    console.log('Error!', err)
+                    document.getElementById('noencontrado').style.display = "block";
+                    document.getElementById('form').style.display = "block";
+                    document.getElementById('buscarCud').style.display = "none";
+                },
+                success: function (data) {
+                    console.log('Success!')
+                    console.log(data.data.beneficiario);
+                    var datos = data.data.beneficiario.persona;
+                    var ocupacion = data.data.beneficiario.condicion_actividad.nombre;
+
+                    $.ajax({
+                        url: '{{ path('get_localidad') }}',
+                        type: 'GET',
+                        data: {
+                            "idLocalidad": datos.direcciones[0].localidad.id
+                        },
+                        error: function (err) {
+                            console.log('Error!', err)
+                        },
+                        success: function (data) {
+                            console.log('Success!')
+                            console.log(data);
+                            $('#app_alumno_localidad').val(data);
+                            $('#app_alumno_localidad').select2().trigger('change');
+                        }
+                    })
+                    document.getElementById('app_alumno_nombre').value = datos.nombre;
+                    $("#app_alumno_nombre").attr("disabled","disabled");
+                    document.getElementById('app_alumno_apellido').value = datos.apellido;
+                    $("#app_alumno_apellido").attr("disabled","disabled");
+                    document.getElementById('app_alumno_dni').value = datos.numero_documento;
+                    $("#app_alumno_dni").attr("disabled","disabled");
+                    document.getElementById('app_alumno_alumno_ocupacion').value = ocupacion;                    
+                    document.getElementById('app_alumno_fechaNacimiento_day').value = '' + new Date(datos.fecha_nacimiento).getDate() + '';                    
+                    document.getElementById('app_alumno_fechaNacimiento_month').value = '' + new Date(datos.fecha_nacimiento).getMonth() + '';                    
+                    document.getElementById('app_alumno_fechaNacimiento_year').value = '' + new Date(datos.fecha_nacimiento).getFullYear() + '';                    
+                    $("#app_alumno_fechaNacimiento_day").attr("disabled","disabled");
+                    $("#app_alumno_fechaNacimiento_month").attr("disabled","disabled");
+                    $("#app_alumno_fechaNacimiento_year").attr("disabled","disabled");
+                    datos.telefonos.forEach( function(valor, indice, array) {
+                        if (valor.tipo_telefono == "C"){
+                        document.getElementById('app_alumno_telefono').value = valor.numero;
+                    }
+                    if (valor.tipo_telefono == "F"){
+                        document.getElementById('app_alumno_telefonoFijo').value = valor.numero;
+                    }
+                    });
+                    var direccionCompleta = "";
+                    if (datos.direcciones[0].barrio.nombre) {
+                        direccionCompleta += "Barrio " + datos.direcciones[0].barrio.nombre.replace(/\s*$/,"");
+                    }
+                    if (datos.direcciones[0].manzana) {
+                        direccionCompleta += " Manzana " + datos.direcciones[0].manzana.replace(/\s*$/,"");
+                    }
+                    if (datos.direcciones[0].parcela) {
+                        direccionCompleta += " Parcela " + datos.direcciones[0].parcela.replace(/\s*$/,"");
+                    }
+                    document.getElementById('app_alumno_direccion').value = direccionCompleta;                        
+                    document.getElementById('encontrado').style.display = "block";
+                    document.getElementById('form').style.display = "block";
+                    document.getElementById('buscarCud').style.display = "none";
+                }
+            });
+        }
+    </script>
+    <script>
+        var fixedfocus = {
+            init: function (fixedElem) {
+                fixedfocus.fixedElem = fixedElem;
+                document.body.addEventListener('focusin', fixedfocus.adjust);
+            },
+
+            adjust: function (e) {
+                var fixedBottomPos = fixedfocus.fixedElem.getBoundingClientRect().bottom;
+                var rect = e.target.getBoundingClientRect();
+                if (rect.top < fixedBottomPos) {
+                    window.scrollBy(0, rect.top - fixedBottomPos);
+                }
+            }
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            fixedfocus.init(document.querySelector('header'));
+        });
+    </script>
+
+{% endblock %}

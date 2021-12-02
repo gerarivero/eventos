@@ -1,0 +1,141 @@
+"36","1","12 DE OCTUBRE                                                                                                                                                                                           "
+"126","1","1º DE MAYO"
+"39","1","2 DE ABRIL                                                                                                                                                                                              "
+"168","1","25 DE MAYO                                                                                                                                                                                              "
+"105","1","9 DE JULIO                                                                                                                                                                                              "
+"7","1","ALMIRANTE BROWN                                                                                                                                                                                         "
+"14","1","BERMEJO                                                                                                                                                                                                 "
+"28","1","CHACABUCO                                                                                                                                                                                               "
+"21","1","COMANDANTE FERNANDEZ                                                                                                                                                                                    "
+"43","1","FRAY JUSTO  SANTA MARIA DE ORO                                                                                                                                                                          "
+"49","1","GENERAL BELGRANO                                                                                                                                                                                        "
+"56","1","GENERAL DONOVAN                                                                                                                                                                                         "
+"63","1","GENERAL GÜEMES"
+"70","1","INDEPENDENCIA                                                                                                                                                                                           "
+"77","1","LIBERTAD                                                                                                                                                                                                "
+"84","1","LIBERTADOR GENERAL SAN MARTIN                                                                                                                                                                           "
+"91","1","MAIPU                                                                                                                                                                                                   "
+"98","1","MAYOR LUIS JORGE FONTANA                                                                                                                                                                                "
+"112","1","O'HIGGINS                                                                                                                                                                                               "
+"119","1","PRESIDENTE DE LA PLAZA                                                                                                                                                                                  "
+"133","1","QUITILIPI                                                                                                                                                                                               "
+"140","1","SAN FERNANDO                                                                                                                                                                                            "
+"147","1","SAN LORENZO                                                                                                                                                                                             "
+"154","1","SARGENTO CABRAL                                                                                                                                                                                         "
+"161","1","TAPENAGA                                                                                                                                                                                                "
+"423","70","AVIA TERAI",NULL,NULL,NULL
+"424","140","BARRANQUERAS",NULL,NULL,NULL
+"425","140","BASAIL",NULL,NULL,NULL
+"426","70","CAMPO LARGO",NULL,NULL,NULL
+"427","70","FORTIN LAS CHU¥AS",NULL,NULL,NULL
+"428","154","CAPITAN SOLARI",NULL,NULL,NULL
+"429","161","CHARADAI",NULL,NULL,NULL
+"430","161","HAUMONIA",NULL,NULL,NULL
+"431","161","HORQILLA",NULL,NULL,NULL
+"432","161","LA SABANA",NULL,NULL,NULL
+"433","28","RURAL",NULL,NULL,NULL
+"434","28","CHARATA",NULL,NULL,NULL
+"435","43","CHOROTIS",NULL,NULL,NULL
+"436","43","VENADOS GRANDES",NULL,NULL,NULL
+"437","84","CIERVO PETISO",NULL,NULL,NULL
+"438","126","BARRIO DE LOS PESCADORES",NULL,NULL,NULL
+"439","126","COLONIA BENITEZ",NULL,NULL,NULL
+"440","154","COLONIA ELISA",NULL,NULL,NULL
+"441","154","INGENIERO BARBET",NULL,NULL,NULL
+"442","77","COLONIA POPULAR",NULL,NULL,NULL
+"443","154","COLONIAS UNIDAS",NULL,NULL,NULL
+"444","7","CONCEPCION DEL BERMEJO",NULL,NULL,NULL
+"445","98","CORONEL DU GRATY",NULL,NULL,NULL
+"446","49","RURAL",NULL,NULL,NULL
+"447","49","CORZUELA",NULL,NULL,NULL
+"448","161","RURAL",NULL,NULL,NULL
+"449","161","COTE LAI",NULL,NULL,NULL
+"450","63","EL SAUZAL",NULL,NULL,NULL
+"451","63","EL SAUZALITO",NULL,NULL,NULL
+"452","63","WICHI",NULL,NULL,NULL
+"453","98","ENRIQUE URIEN",NULL,NULL,NULL
+"454","140","FONTANA",NULL,NULL,NULL
+"455","63","FUERTE ESPERANZA",NULL,NULL,NULL
+"456","36","GANCEDO",NULL,NULL,NULL
+"457","36","GENERAL CAPDEVILLA",NULL,NULL,NULL
+"458","36","RURAL",NULL,NULL,NULL
+"459","36","GENERAL PINEDO",NULL,NULL,NULL
+"460","36","MESON DE FIERRO",NULL,NULL,NULL
+"461","36","PAMPA LANDRIEL",NULL,NULL,NULL
+"462","84","GENERAL SAN MARTIN",NULL,NULL,NULL
+"463","14","GENERAL VEDIA",NULL,NULL,NULL
+"464","39","RURAL",NULL,NULL,NULL
+"465","39","HERMOSO CAMPO",NULL,NULL,NULL
+"466","39","ITIN",NULL,NULL,NULL
+"467","14","ISLA DEL CERRITO",NULL,NULL,NULL
+"468","63","EL ESPINILLO",NULL,NULL,NULL
+"469","63","JUAN JOSE CASTELLI",NULL,NULL,NULL
+"470","63","ZAPARINQUI",NULL,NULL,NULL
+"471","112","LA CLOTILDE",NULL,NULL,NULL
+"472","84","LA EDUVIGIS",NULL,NULL,NULL
+"473","56","LA ESCONDIDA",NULL,NULL,NULL
+"474","14","LA LEONESA",NULL,NULL,NULL
+"475","112","LA TIGRA",NULL,NULL,NULL
+"476","56","LA VERDE",NULL,NULL,NULL
+"477","77","LAGUNA BLANCA",NULL,NULL,NULL
+"478","84","LAGUNA LIMPIA",NULL,NULL,NULL
+"479","56","LAPACHITO",NULL,NULL,NULL
+"480","105","RURAL",NULL,NULL,NULL
+"481","105","LAS BRE¥AS",NULL,NULL,NULL
+"482","154","RURAL",NULL,NULL,NULL
+"483","154","LAS GARCITAS",NULL,NULL,NULL
+"484","14","LAS PALMAS",NULL,NULL,NULL
+"485","7","LOS FRENTONES",NULL,NULL,NULL
+"486","7","RIO MUERTO",NULL,NULL,NULL
+"487","168","RURAL",NULL,NULL,NULL
+"488","168","COLONIA ABORIGEN",NULL,NULL,NULL
+"489","168","MACHAGAI",NULL,NULL,NULL
+"490","168","NAPALPI",NULL,NULL,NULL
+"491","56","RURAL",NULL,NULL,NULL
+"492","56","MAKALLE",NULL,NULL,NULL
+"493","126","RURAL",NULL,NULL,NULL
+"494","126","MARGARITA BELEN",NULL,NULL,NULL
+"495","63","MIRAFLORES",NULL,NULL,NULL
+"496","70","RURAL",NULL,NULL,NULL
+"497","70","NAPENAY",NULL,NULL,NULL
+"498","63","MISION NUEVA POMPEYA",NULL,NULL,NULL
+"499","84","PAMPA ALMIRON",NULL,NULL,NULL
+"500","84","PAMPA DEL INDIO",NULL,NULL,NULL
+"501","7","PAMPA DEL INFIERNO",NULL,NULL,NULL
+"502","119","RURAL",NULL,NULL,NULL
+"503","119","PRESIDENCIA DE LA PLAZA",NULL,NULL,NULL
+"504","84","RURAL",NULL,NULL,NULL
+"505","84","PRESIDENCIA ROCA",NULL,NULL,NULL
+"506","21","RURAL",NULL,NULL,NULL
+"507","21","PRESIDENCIA ROQUE SAENZ PE¥A",NULL,NULL,NULL
+"508","14","PUERTO BERMEJO NUEVO",NULL,NULL,NULL
+"509","14","PUERTO BERMEJO VIEJO",NULL,NULL,NULL
+"510","14","RURAL",NULL,NULL,NULL
+"511","14","PUERTO EVA PERON",NULL,NULL,NULL
+"512","77","RURAL",NULL,NULL,NULL
+"513","77","ESTACION GENERAL OBLIGADO",NULL,NULL,NULL
+"514","77","PUERTO TIROL",NULL,NULL,NULL
+"515","140","PUERTO VILELAS",NULL,NULL,NULL
+"516","133","RURAL",NULL,NULL,NULL
+"517","133","QUITILIPI",NULL,NULL,NULL
+"518","133","VILLA EL PALMAR",NULL,NULL,NULL
+"519","140","RURAL",NULL,NULL,NULL
+"520","140","COLONIA BARANDA",NULL,NULL,NULL
+"521","140","RESISTENCIA",NULL,NULL,NULL
+"522","147","SAMUHU",NULL,NULL,NULL
+"523","112","RURAL",NULL,NULL,NULL
+"524","112","SAN BERNARDO",NULL,NULL,NULL
+"525","43","RURAL",NULL,NULL,NULL
+"526","43","SANTA SYLVINA",NULL,NULL,NULL
+"527","7","RURAL",NULL,NULL,NULL
+"528","7","TACO POZO",NULL,NULL,NULL
+"529","91","RURAL",NULL,NULL,NULL
+"530","91","TRES ISLETAS",NULL,NULL,NULL
+"531","98","RURAL",NULL,NULL,NULL
+"532","98","VILLA ANGELA",NULL,NULL,NULL
+"533","147","RURAL",NULL,NULL,NULL
+"534","147","VILLA BERTHET",NULL,NULL,NULL
+"535","63","RURAL",NULL,NULL,NULL
+"536","63","FORTIN LAVALLE",NULL,NULL,NULL
+"537","63","PUERTO LAVALLE",NULL,NULL,NULL
+"538","63","VILLA RIO BERMEJITO",NULL,NULL,NULL

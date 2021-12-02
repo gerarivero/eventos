@@ -1,0 +1,64 @@
+{% if value == 'Pre-inscripto'%}
+    <button class="btn badge badge-pill badge-warning" data-target="#modal{{item.id}}" data-toggle="modal" type="button">
+        {{ value }}
+    </button>
+{% elseif value == 'Inscripto'%}
+    <button class="btn badge badge-pill badge-primary" data-target="#modal{{item.id}}" data-toggle="modal" type="button">
+        {{ value }}
+    </button>
+{% elseif value == 'Aprobado'%}
+    <button class="btn badge badge-pill badge-success" data-target="#modal{{item.id}}" data-toggle="modal" type="button">
+        {{ value }}
+    </button>
+{% elseif value == 'Desaprobado'%}
+    <button class="btn badge badge-pill badge-danger" data-target="#modal{{item.id}}" data-toggle="modal" type="button">
+        {{ value }}
+    </button>
+{% else %}
+    <button class="btn badge badge-pill badge-secondary" data-target="#modal{{item.id}}" data-toggle="modal" type="button">
+        {{ value }}
+    </button>
+{% endif %}
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal{{item.id}}" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cambiar Estado</h5>
+                <button aria-label="Cerrar" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button id="Pre-inscripto" onclick='cambiarEstado("Pre-inscripto", {{item.id}});' class="estado btn badge badge-pill badge-warning" type="button">
+                    Pre-inscripto
+                </button>
+                <button id="Inscripto" onclick='cambiarEstado("Inscripto", {{item.id}});' class="estado btn badge badge-pill badge-primary" type="button">
+                    Inscripto
+                </button>
+                <button id="Aprobado" onclick='cambiarEstado("Aprobado", {{item.id}});' class="estado btn badge badge-pill badge-success" type="button">
+                    Aprobado
+                </button>
+                <button id="Desaprobado" onclick='cambiarEstado("Desaprobado", {{item.id}});' class="estado btn badge badge-pill badge-danger" type="button">
+                    Desaprobado
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function cambiarEstado(estado, entity){   
+  $.ajax({url: "{{path('cambiar_estado')}}",
+    type: "POST",
+    data: {estado: estado, entity: entity},
+    success: function() {
+        location.reload(true);
+    }    
+  });
+
+}
+</script>
+

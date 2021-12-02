@@ -1,0 +1,141 @@
+{% extends 'frontend/layout.html.twig' %}
+{% block page %}
+<style>
+.img-banner {
+    max-height: 200px;
+}
+</style>
+    <main class="container">
+        {% for label, messages in app.flashes(['warning', 'error', 'success']) %}
+            {% for message in messages %}
+                <div tabindex="16" class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <section class="estatica">
+            <div class="listatit">
+                <h1 tabindex="16">
+                    <span class="go"><img alt="ir" src="/static/images/go.svg"></span>Cursos</h1>
+                <hr>
+            </div>
+            <nav aria-label="breadcrumb" class="hidden-sm">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="http://iprodich.gob.ar" tabindex="16">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{path('cursos')}}" tabindex="16">Cursos</a>
+                    </li>
+                    <li aria-current="page" class="breadcrumb-item active" tabindex="16">{{curso.nombre}}</li>
+                </ol>
+            </nav>
+            <div class="row">
+                <div class="col cudd">
+                    <div class="tramite d-flex justify-content-center align-items-center">
+                        <figure class="principal" tabindex="16"><img src="{{ asset('uploads/cursos/'~curso.imagenPrincipal)}}" alt="..." class="img-fluid img-banner"></figure>
+                        <div class="cud" tabindex="16">
+                            {{curso.nombre}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 hidden="">contenido</h2>
+            <h3 hidden="">contenido</h3>
+            <h4 hidden="">contenido</h4>
+            <div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8" tabindex="17">
+                        <div class="my-3 p-3 bg-white rounded shadow-sm">
+                            <h5 ID="content" tabindex="17" class="border-bottom border-gray pb-2 mb-0">Información Sobre el Curso</h5>
+                            <div class="media text-muted pt-3">
+                                <p tabindex="17" class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark">Objetivos</strong>
+                                    {{curso.objetivos}}
+                                </p>
+                            </div>
+                            <div class="media text-muted pt-3">
+                                <p tabindex="17" class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark">Detalles</strong>
+                                    {{curso.detalles}}
+                                </p>
+                            </div>
+                            <div class="media text-muted pt-3">
+                                <p tabindex="17" class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark">Lugar</strong>
+                                    {{curso.lugar}}
+                                </p>
+                            </div>
+                            <div class="media text-muted pt-3">
+                                <p tabindex="17" class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark">Duración</strong>
+                                    {{curso.duracion}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" tabindex="17">
+                        <div class="mb-3 bg-light rounded">
+
+                            <ul class="d-flex align-content-start flex-wrap">
+                                <li>
+                                    <a class="descarga" title="Fecha de Inicio de Inscripcion">
+
+                                        <span tabindex="17" class="txt-down">Inicio de Pre-inscripciones:
+                                            {{curso.fechaInicioInscripcion|date("d/m/Y")}}</span>
+                                    </a>
+                                </li>
+                                </ul>
+                                <ul class="d-flex align-content-start flex-wrap">
+                                <li>
+                                    <a class="descarga" title="Fecha de Inicio de Inscripcion">
+
+                                        <span tabindex="17" class="txt-down">Fin de Pre-inscripciones:
+                                            {{curso.fechaFinInscripcion|date("d/m/Y")}}</span>
+                                    </a>
+                                </li>
+                                </ul>
+                                <br>
+                                <ul class="d-flex align-content-start flex-wrap">
+                                <li>
+                                    <a class="descarga" title="Descargar archivo">
+
+                                        <span tabindex="17" class="txt-down">Inicio del Curso:
+                                            {{curso.fechaInicio|date("d/m/Y")}}</span>
+                                    </a>
+                                </li>
+                                </ul>
+                                <ul class="d-flex align-content-start flex-wrap">
+                                <li>
+                                    <a class="descarga" title="Descargar archivo">
+
+                                        <span tabindex="17" class="txt-down">Fin del Curso:
+                                            {{curso.fechaFin|date("d/m/Y")}}</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                        <h5 tabindex="17">Material del Curso</h5>
+                        <ul class="d-flex align-content-start flex-wrap">
+                            {% for material in curso.materiales %}
+                            <li>
+                                <a tabindex="17" href="{{ asset('uploads/cursos/'~ material.path) }}" class="descarga" tabindex="18" title="Descargar archivo">
+                                    <span class="down"></span>
+                                    <span class="txt-down">{{material.alt}}</span>
+                                </a>
+                            </li>
+                            {% endfor %}                            
+                        </ul>
+                        <hr>
+                        {% if "now"|date("ymd") <= curso.fechaFinInscripcion|date("ymd") and "now"|date("ymd") >= curso.fechaInicioInscripcion|date("ymd")%}
+                        <a tabindex="17" href="{{path("inscripcion", {'idCurso': curso.id})}}" class="btn btn-info btn-lg btn-block">Pre-Inscripción</a>
+                        {% endif %}      
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+

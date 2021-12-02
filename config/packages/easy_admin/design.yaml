@@ -1,0 +1,37 @@
+easy_admin:
+    design:
+        templates:            
+            list: 'backend/customList.html.twig'            
+        menu:
+            - { label: 'Personas', icon: 'male', entity: 'Persona', permission: [ROLE_SUPER_ADMIN]}
+            - label: 'Cursos'
+              icon: 'chalkboard-teacher'
+              children:         
+                - { label: 'Cursos', icon: 'file-list', entity: 'Curso', permission: [ROLE_CURSO]}
+                - { label: 'Docentes', icon: 'file-list', entity: 'Docente', permission: [ROLE_CURSO]}
+                - { label: 'Alumnos', icon: 'file-list', entity: 'Alumno', permission: [ROLE_CURSO]}
+                - { label: 'Inscripciones', icon: 'file-list', entity: 'Inscripcion', permission: [ROLE_CURSO, ROLE_CURSO_ACREDITADOR]}
+                - { label: 'Estadísticas', icon: 'file-new', route: 'estadisticas_cursos', permission: [ROLE_SUPER_ADMIN]}
+              permission: [ROLE_CURSO, ROLE_CURSO_ACREDITADOR]
+            - label: 'Congresos'
+              icon: 'bullhorn'
+              children:                
+                - { label: 'Congreso', icon: 'file-list', entity: 'Congreso', permission: [ROLE_ADMIN_CONGRESO, ROLE_CONGRESO_ACREDITADOR]}                
+                - { label: 'Inscripciones', icon: 'file-new', entity: 'InscripcionCongreso', permission: [ROLE_SUPER_ADMIN]}
+                - { label: 'Importar Inscriptos', icon: 'file-new', route: 'importar_inscriptos', permission: [ROLE_SUPER_ADMIN]}
+                - { label: 'Estadísticas', icon: 'file-new', route: 'estadisticas_congresos', permission: [ROLE_SUPER_ADMIN]}
+              permission: [ROLE_SUPER_ADMIN, ROLE_ADMIN_CONGRESO, ROLE_CONGRESO_ACREDITADOR]
+            - label: 'Certificados'
+              icon: 'award'
+              children:                
+                - { label: 'Plantillas', icon: 'file-list', entity: 'Plantilla', permission: [ROLE_SUPER_ADMIN]}
+                - { label: 'Qrs', icon: 'file-list', entity: 'Qr', permission: [ROLE_SUPER_ADMIN]}
+              permission: [ROLE_SUPER_ADMIN]
+            - { label: 'Usuarios', icon: 'user', entity: 'User', permission: [ROLE_SUPER_ADMIN]}
+            - { label: 'Departamentos', icon: 'thumbtack', entity: 'Departamento', permission: [ROLE_SUPER_ADMIN]}
+            - { label: 'Localidades', icon: 'thumbtack', entity: 'Localidad', permission: [ROLE_SUPER_ADMIN]}
+            - { label: 'Configuraciones', icon: 'thumbtack', entity: 'Config', permission: [ROLE_SUPER_ADMIN]}
+            - { label: 'Menu', icon: 'thumbtack', entity: 'Menu', permission: [ROLE_SUPER_ADMIN]}
+        brand_color: 'green'
+        assets:
+            favicon: '/images/logo_favicon.png'

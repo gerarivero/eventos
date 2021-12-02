@@ -1,0 +1,25 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        Config:
+            class: App\Entity\Config            
+            label: 'Configuraciones'
+            templates:
+              new: 'backend/newConTinymce.html.twig'
+              edit: 'backend/editConTinymce.html.twig'
+            item_permission: ROLE_SUPER_ADMIN
+            form:
+                fields:    
+                  - { property: 'footer', css_class: 'col-md-6' }           
+            list:
+                item_permission: ROLE_SUPER_ADMIN
+                fields:    
+                  - { property: 'id', css_class: 'col-md-6' }
+                actions:
+                  - { name: 'new', permission: ROLE_SUPER_ADMIN}
+            export:
+                item_permission: ROLE_SUPER_ADMIN
+            new:
+                item_permission: ROLE_SUPER_ADMIN
+            edit:
+                item_permission: ROLE_SUPER_ADMIN

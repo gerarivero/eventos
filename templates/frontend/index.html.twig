@@ -1,0 +1,105 @@
+{% extends 'frontend/layout.html.twig' %}
+{% block page %}
+<style>
+.card-img-top {
+    max-height: 200px;
+}
+.card-text {
+    overflow: hidden;
+    max-height: 10ch;
+}
+
+.h2, h2 {
+    font-size: 1.5em !important;
+}
+</style>
+    <div class="container-fluid content-row">
+        <main class="container">
+        <!-- Ultima Noticia -->
+        <section class="ultimate">
+            <div class="listatit">
+                <h1 tabindex="17" class="scfocus"><span class="go"><img src="/static/images/go.svg" alt="ir"></span>Próximos Cursos</h1>
+                <hr>
+            </div>
+        <div class="row">
+            <div id="content" tabindex="17" class="col-md-8">
+            <div class="row">
+            {% for curso in cursos %}
+            {% if "now"|date("ymd") < curso.fechaInicio|date("ymd") %}            
+            <div class="col-sm-12 col-md-6 d-flex align-items-stretch pb-3">
+                <div class="card h-100 d-flex">
+                    <img tabindex="17" src="{{ asset('uploads/cursos/'~curso.imagenPrincipal)}}" class="card-img-top img-fluid" alt="...">
+                    <div class="card-body d-flex flex-column">
+                        <h2 tabindex="17" class="card-title">{{curso.nombre}}</h2>
+                        <p tabindex="17" class="card-text">{{curso.detalles}}</p>
+                        <a tabindex="17" href="{{path("detalles_curso", {'idCurso': curso.id})}}" class="btn btn-block btn-info btn-lg mt-auto">Me interesa</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        <div tabindex="17" class="col-md-4">
+                        <div class="list-group">
+						<a tabindex="17" href="{{path("certificados")}}" class="list-group-item list-group-item-action flex-column align-items-start">
+							<div class="d-flex w-100 justify-content-between">
+								<p class="mb-1">Certificados</p>
+								<i class="fas fa-angle-double-right fa-2x"></i>
+							</div>
+							<small class="text-muted"></small>
+						</a>
+						<a tabindex="17" href="{{path("materiales")}}" class="list-group-item list-group-item-action flex-column align-items-start">
+							<div class="d-flex w-100 justify-content-between">
+								<p class="mb-1">Materiales</p>
+								<i class="fas fa-angle-double-right fa-2x"></i>
+							</div>
+							<small class="text-muted"></small>
+						</a>						
+					</div>
+					<hr>  
+                        
+                        {% set i = 0 %}
+                        {% for curso in cursos %}
+                        {% if "now"|date("ymd") >= curso.fechaInicio|date("ymd") and "now"|date("ymd") <= curso.fechaFin|date("ymd")%}
+                        {% if i == 0 %}
+                        <h5 tabindex="17">Cursos en Desarrollo</h5>
+                        {% set i = 1 %}
+                        {% endif %}
+                        <a href="{{path("detalles_curso", {'idCurso': curso.id})}}"><div tabindex="17" class="carnet">                                
+                                <div class="d-flex justify-content-start">
+                                                                            <figure><img src="{{ asset('uploads/cursos/'~curso.imagenPrincipal)}}" alt="curso"></figure>
+                                            
+                                    <figcaption class="flex-fill">
+                                        <p><strong>{{curso.nombre}}</strong></p>
+                                    </figcaption>
+                                </div>
+                            </div>
+                            </a>
+                            {% endif %}
+                            {% endfor %}
+                    <hr>                        
+                        {% set i = 0 %}
+                        {% for curso in cursos %}
+                        {% if i == 0 %}
+                        <h5 tabindex="17">Cursos Finalizados</h5>
+                        {% set i = 1 %}
+                        {% endif %}
+                        {% if "now"|date("ymd") >= curso.fechaFin|date("ymd") %}
+                        <div tabindex="17" class="carnet">                                
+                                <div class="d-flex justify-content-start">
+                                                                            <figure><img src="{{ asset('uploads/cursos/'~curso.imagenPrincipal)}}" alt="curso"></figure>
+                                            
+                                    <figcaption class="flex-fill">
+                                        <p><strong>{{curso.nombre}}</strong></p>
+                                    </figcaption>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                    </div>
+        </div>
+        </section>
+    </div>
+
+{% endblock %}

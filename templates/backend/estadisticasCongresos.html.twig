@@ -1,0 +1,84 @@
+{% extends '@EasyAdmin/default/layout.html.twig' %}
+{% block content_title %}
+    {% apply spaceless %}
+    {% set _default_title = 'Estadísticas del Evento' %}
+    {{ _entity_config.new.title is defined ? _entity_config.new.title|trans(_trans_parameters) : _default_title }}
+    {% endapply %}
+{% endblock %}
+{% block main %}
+    {% block entity_form %}
+        {{ form_start(form) }}
+         <div class="row">
+                        
+                        {{ form_widget(form.fechaDesde.day, {'attr': {'class': 'form-control', 'tabindex': '16', 'hidden': true}}) }}
+                        
+                        {{ form_widget(form.fechaDesde.month, {'attr': {'class': 'form-control', 'tabindex': '16', 'hidden': true}}) }}
+                                         
+                        <div class="col">
+                        {{ form_label(form.fechaDesde) }}
+                        {{ form_widget(form.fechaDesde.year, {'attr': {'class': 'form-control', 'tabindex': '16'}}) }}
+                        </div>
+                        {{ form_widget(form.fechaHasta.day, {'attr': {'class': 'form-control', 'tabindex': '16', 'hidden': true}}) }}
+                        
+                        {{ form_widget(form.fechaHasta.month, {'attr': {'class': 'form-control', 'tabindex': '16', 'hidden': true}}) }}
+                                         
+                        <div class="col">
+                        {{ form_label(form.fechaHasta) }}
+                        {{ form_widget(form.fechaHasta.year, {'attr': {'class': 'form-control', 'tabindex': '16'}}) }}
+                        </div>
+                    </div>
+                    
+        {{ form_row(form.fechaDesde) }}
+        {{ form_row(form.fechaHasta) }}
+        <br>
+        <div class="col-md-12 multi-horizontal">
+                    <button tabindex="16" type="submit" class="btn btn-info btn-lg btn-block scfocus">FILTRAR</button>
+                </div>
+                <hr>
+        {{ form_end(form) }}
+        
+        <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+    {% endblock entity_form %}
+{% endblock %}
+{% block body_javascript %}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script>
+        Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Cantidad de Inscriptos por Congreso'
+    },    
+    xAxis: {
+        categories: {{anios|json_encode|raw}},
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'cantidad de inscriptos'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} inscriptos</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0,
+            stacking: 'normal'
+        }
+    },
+    series: {{congresos|json_encode|raw}}
+});
+    </script>
+{% endblock body_javascript %}
